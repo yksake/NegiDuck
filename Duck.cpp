@@ -18,8 +18,23 @@ void Duck::update(const dss::InputState& input)
 
 	// Move
 	{
-		m_velocity = input.leftStick;
-		m_velocity *= m_MoveVelocity * Scene::DeltaTime();
+		m_speed += input.leftStick * m_MoveVelocity * Scene::DeltaTime();
+
+		if (input.leftStick.x == 0)
+		{
+			m_speed.x *= m_Registance * Scene::DeltaTime() / (1.0 / 60.0);
+		}
+		if (input.leftStick.y == 0)
+		{
+			m_speed.y *= m_Registance * Scene::DeltaTime() / (1.0 / 60.0);
+		}
+
+		if (m_TerminalVelocity < m_speed.length())
+		{
+			m_speed.setLength(m_TerminalVelocity);
+		}
+
+		m_velocity = m_speed;
 
 		if (m_velocity.x < 0)
 		{

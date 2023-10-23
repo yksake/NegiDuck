@@ -27,10 +27,11 @@ private:
 	static constexpr SizeF m_ViewSize = { 70, 70 };
 	Size m_clipSize = { 12, 12 };
 	uint16 m_stamina = 100;
-	static constexpr double m_MoveVelocity = 300;
+	static constexpr double m_MoveVelocity = 7;
+	static constexpr double m_Registance = 0.95;
 	Vec2 m_speed = Vec2::Zero();
 	Vec2 m_velocity = Vec2::Zero();
-	double m_terminalVelocity = 0;
+	static constexpr double m_TerminalVelocity = 3.0;
 	Vec2 m_previousVelocity = Vec2::Zero();
 
 	bool m_isRight = true;

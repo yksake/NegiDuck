@@ -55,8 +55,6 @@ void InputManager::beginFrame()
 	m_inputs.leftStick.x = m_keyboard.right.pressed() - m_keyboard.left.pressed();
 	m_inputs.leftStick.y = m_keyboard.down.pressed() - m_keyboard.up.pressed();
 
-	Print << m_inputs.left.pressed() << U", " << m_inputs.right.pressed() << U", " << m_inputs.up.pressed() << U", " << m_inputs.down.pressed();
-
 	updateXInput();
 	updateProCon();
 	updateGamepad();
