@@ -13,7 +13,7 @@ void Main()
 	manager
 		.add<Title>(State::Title)
 		.add<Game>(State::Game)
-		.init(State::Title, 0);
+		.init(State::Game, 0);
 
 	while (System::Update())
 	{

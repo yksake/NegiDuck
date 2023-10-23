@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <Siv3D.hpp>
+#include "Input/InputManager.hpp"
 
 enum class State
 {
@@ -10,6 +11,9 @@ enum class State
 struct Common
 {
 public:
+	dss::InputManager input;
+
+
 	Common();
 };
 

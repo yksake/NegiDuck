@@ -8,7 +8,6 @@ public:
 	GameObject(const Vec2& pos, const SizeF& size);
 	virtual ~GameObject() = default;
 
-	virtual void update() = 0;
 	virtual void draw() const = 0;
 
 	void moveX(const double& x);

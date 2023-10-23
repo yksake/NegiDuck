@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Common.hpp"
+#include "Duck.hpp"
 
 class Game : public MyApp::Scene
 {
@@ -11,5 +12,5 @@ public:
 
 
 private:
-	
+	Duck player{ Scene::CenterF() };
 };
