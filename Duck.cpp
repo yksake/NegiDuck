@@ -36,14 +36,21 @@ void Duck::update(const dss::InputState& input)
 
 		m_velocity = m_speed;
 
+		if (input.leftStick.x < 0)
+		{
+			m_isRight = false;
+		}
+		else if (0 < input.leftStick.x)
+		{
+			m_isRight = true;
+		}
+
 		if (m_velocity.x < 0)
 		{
 			if (0 <= m_previousVelocity.x)
 			{
 				m_animationTimer.restart();
 			}
-
-			m_isRight = false;
 		}
 		else if (0 < m_velocity.x)
 		{
@@ -51,8 +58,6 @@ void Duck::update(const dss::InputState& input)
 			{
 				m_animationTimer.restart();
 			}
-
-			m_isRight = true;
 		}
 		else
 		{

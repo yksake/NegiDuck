@@ -20,14 +20,14 @@ void Noodle::hitEventLR(Duck& duck)
 		if (0 < duck.velocity().x)
 		{
 			duck.moveX(leftX() - duck.rightX());
+			duck.setSpeedX(-m_BoundSpeed);
 		}
 		// 右から接触
 		else
 		{
 			duck.moveX(rightX() - duck.leftX());
+			duck.setSpeedX(m_BoundSpeed);
 		}
-
-		duck.setSpeedX(0);
 	}
 }
 
@@ -39,14 +39,14 @@ void Noodle::hitEventTB(Duck& duck)
 		if (duck.velocity().y < 0)
 		{
 			duck.moveY(bottomY() - duck.topY());
+			duck.setSpeedY(m_BoundSpeed);
 		}
 		// 上から接触
 		else
 		{
 			duck.moveY(topY() - duck.bottomY());
+			duck.setSpeedY(-m_BoundSpeed);
 		}
-
-		duck.setSpeedY(0);
 	}
 }
 

@@ -17,5 +17,5 @@ public:
 
 
 private:
-
+	static constexpr double m_BoundSpeed = 10;
 };
