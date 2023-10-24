@@ -1,21 +1,21 @@
 ﻿#pragma once
-#include "GameObject.hpp"
-#include "Duck.hpp"
+#include "Ingredient.hpp"
 
-class Noodle : public GameObject
+class Noodle : public Ingredient
 {
 public:
 	Noodle(const Vec2& pos, const SizeF& size);
 
+	void update() override;
 	void draw() const override;
 
-	void hitEventLR(Duck& duck);
-	void hitEventTB(Duck& duck);
+	void hitEventLR(Duck& duck) override;
+	void hitEventTB(Duck& duck) override;
 
 	void pause() override;
 	void resume() override;
 
 
 private:
-	static constexpr double m_BoundSpeed = 10;
+	static constexpr double m_BoundSpeed = 7;
 };

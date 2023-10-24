@@ -1,10 +1,10 @@
 ﻿#pragma once
 #include "Ingredient.hpp"
 
-class GreenOnion : public Ingredient
+class Bomb : public Ingredient
 {
 public:
-	GreenOnion(const Vec2& pos);
+	Bomb(const Vec2& pos);
 
 	void update() override;
 	void draw() const override;
@@ -18,4 +18,7 @@ public:
 
 private:
 	static constexpr SizeF m_Size = { 50, 50 };
+	static constexpr double m_RejectSpeed = 9;
+	bool m_isActive = true;
+	Timer m_animationTimer{ Duration{ 1.0 } };
 };

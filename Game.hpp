@@ -1,8 +1,7 @@
 ﻿#pragma once
 #include "Common.hpp"
-#include "Noodle.hpp"
+#include "RamenBowl.hpp"
 #include "Duck.hpp"
-#include "GreenOnion.hpp"
 
 class Game : public MyApp::Scene
 {
@@ -14,7 +13,6 @@ public:
 
 
 private:
-	Noodle noodle{ Scene::CenterF() + Vec2{100, 50}, SizeF{20, 100} };
+	RamenBowl bowl;
 	Duck player{ Scene::CenterF() };
-	GreenOnion negi{ Scene::CenterF() - Vec2{200, 0} };
 };

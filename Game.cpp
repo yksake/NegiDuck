@@ -15,27 +15,17 @@ void Game::update()
 {
 	getData().input.beginFrame();
 
+	bowl.update();
+
 	player.update(getData().input.inputState());
 
-	player.moveX(player.velocity().x);
-	noodle.hitEventLR(player);
-
-	player.moveY(player.velocity().y);
-	noodle.hitEventTB(player);
-
-	if (negi.isHit(player))
-	{
-		negi.kill();
-	}
+	bowl.check(player, getData().input.inputState());
 }
 
 
 void Game::draw() const
 {
-	noodle.draw();
+	bowl.draw();
 
-	negi.draw();
-
-	player.hitRegion().draw(Color{ 255, 0, 0, 100 });
 	player.draw();
 }

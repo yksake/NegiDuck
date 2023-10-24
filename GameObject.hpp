@@ -32,7 +32,7 @@ public:
 
 protected:
 	Texture m_texture;
-	// 中央下の座標
+	// 中央座標
 	Vec2 m_pos;
 	Vec2 m_hitSize;
 	Vec2 m_viewSize;

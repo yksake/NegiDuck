@@ -42,17 +42,15 @@ Vec2 GameObject::pos() const
 RectF GameObject::hitRegion() const
 {
 	const double x = m_pos.x - (m_hitSize.x / 2);
-	const double y = m_pos.y - m_hitSize.y;
+	const double y = m_pos.y - (m_hitSize.y / 2);
 
 	return RectF{ x, y, m_hitSize };
 }
 
 RectF GameObject::viewRegion() const
 {
-	// viewRegion() の中央は hitRegion() の中央
-
 	const double x = m_pos.x - (m_viewSize.x / 2);
-	const double y = m_pos.y - m_viewSize.y + (m_viewSize.y - m_hitSize.y) / 2;
+	const double y = m_pos.y - (m_viewSize.y / 2);
 
 	return RectF{ x, y, m_viewSize };
 }

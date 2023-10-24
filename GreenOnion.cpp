@@ -1,10 +1,15 @@
 ﻿#include "GreenOnion.hpp"
 
-GreenOnion::GreenOnion(const Vec2& pos) : GameObject(pos, m_Size)
+GreenOnion::GreenOnion(const Vec2& pos) : Ingredient(pos, m_Size)
 {
 
 }
 
+
+void GreenOnion::update()
+{
+
+}
 
 void GreenOnion::draw() const
 {
@@ -13,7 +18,34 @@ void GreenOnion::draw() const
 		return;
 	}
 
-	Circle{viewRegion().center(), m_Size.x / 2}.drawFrame(0, 8, Palette::Limegreen);
+	Circle{m_pos, m_Size.x / 2}.drawFrame(8, 0, Palette::Limegreen);
+}
+
+
+void GreenOnion::hitEventLR(Duck& duck)
+{
+	if (not isAlive())
+	{
+		return;
+	}
+
+	if (isHit(duck))
+	{
+		kill();
+	}
+}
+
+void GreenOnion::hitEventTB(Duck& duck)
+{
+	if (not isAlive())
+	{
+		return;
+	}
+
+	if (isHit(duck))
+	{
+		kill();
+	}
 }
 
 
