@@ -130,6 +130,12 @@ void Duck::setEnvironmentalSpeedY(const double& environmentalSpeedY)
 }
 
 
+Vec2 Duck::velocity() const
+{
+	return m_velocity;
+}
+
+
 bool Duck::isFloating() const
 {
 	return m_isFloating;
@@ -157,9 +163,56 @@ void Duck::setDirection(const bool isRight)
 }
 
 
-Vec2 Duck::velocity() const
+double Duck::staminaPercentage() const
 {
-	return m_velocity;
+	double percentage = m_stamina / m_MaxStamina;
+
+	return percentage;
+}
+
+void Duck::recoverStamina(const double& recover)
+{
+	m_stamina += recover;
+
+	if (m_MaxStamina < m_stamina)
+	{
+		m_stamina = m_MaxStamina;
+	}
+}
+
+void Duck::consumeStamina(const double& consume)
+{
+	m_stamina -= consume;
+
+	if (m_stamina < 0)
+	{
+		kill();
+	}
+}
+
+
+void Duck::getGreenOnion()
+{
+	if (not isAlive())
+	{
+		return;
+	}
+
+	m_greenOnionCnt++;
+}
+
+uint8 Duck::putGreenOnion()
+{
+	if (not isAlive())
+	{
+		return 0;
+	}
+
+	const uint8 cnt = m_greenOnionCnt;
+
+	m_greenOnionCnt = 0;
+
+	return cnt;
 }
 
 

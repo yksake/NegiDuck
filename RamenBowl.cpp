@@ -1,13 +1,13 @@
 ﻿#include "RamenBowl.hpp"
-#include "GreenOnion.hpp"
 #include "Bomb.hpp"
 
 RamenBowl::RamenBowl()
 {
 	m_noodles << Noodle{ Scene::CenterF() + Vec2{100, 50}, SizeF{20, 100} };
 
-	m_items << std::make_unique<GreenOnion>(Scene::CenterF() - Vec2{ 200, 0 });
-	m_items << std::make_unique<Bomb>(Scene::CenterF() - Vec2{ 0, 200 });
+	m_greenOnions << GreenOnion{ Scene::CenterF() - Vec2{200, 0} };
+
+	m_objects << std::make_unique<Bomb>(Scene::CenterF() - Vec2{ 0, 200 });
 }
 
 
@@ -17,9 +17,13 @@ void RamenBowl::update()
 	{
 		noodle.update();
 	}
-	for (auto&& item : m_items)
+	for (auto&& greenOnion : m_greenOnions)
 	{
-		item->update();
+		greenOnion.update();
+	}
+	for (auto&& object : m_objects)
+	{
+		object->update();
 	}
 }
 
@@ -27,13 +31,19 @@ void RamenBowl::draw() const
 {
 	m_GameArea.drawFrame(0, 5, Palette::White);
 
+	m_spoon.draw();
+
 	for (const auto& noodle : m_noodles)
 	{
 		noodle.draw();
 	}
-	for (const auto& item : m_items)
+	for (const auto& object : m_objects)
 	{
-		item->draw();
+		object->draw();
+	}
+	for (const auto& greenOnion : m_greenOnions)
+	{
+		greenOnion.draw();
 	}
 }
 
@@ -52,6 +62,7 @@ void RamenBowl::check(Duck& duck, const dss::InputState& input)
 
 void RamenBowl::checkFloating(Duck& duck, const dss::InputState& input)
 {
+	const double StaminaRecoverSpeed = 30.0;
 	const Vec2 duckSpeed = duck.speed();
 
 	// Move X
@@ -77,14 +88,26 @@ void RamenBowl::checkFloating(Duck& duck, const dss::InputState& input)
 		if (input.downPressed)
 		{
 			duck.diveDown();
-			duck.moveY(duck.hitRegion().h);
+			duck.moveY(m_GameArea.topY() - duck.topY());
+			duck.setSpeedY(0);
 			return;
 		}
+	}
+
+	duck.recoverStamina(StaminaRecoverSpeed * Scene::DeltaTime());
+
+	// Chinese Spoon
+	if (m_spoon.isHit(duck))
+	{
+		duck.putGreenOnion();
+
+		m_greenOnions.remove_if([](const GreenOnion& go) { return not go.isAlive(); });
 	}
 }
 
 void RamenBowl::checkSwimming(Duck& duck, const dss::InputState& input)
 {
+	const double staminaDecreaseSpeed = 6.0;
 	const Vec2 duckSpeed = duck.speed();
 
 	// Move X
@@ -108,9 +131,13 @@ void RamenBowl::checkSwimming(Duck& duck, const dss::InputState& input)
 		{
 			noodle.hitEventLR(duck);
 		}
-		for (auto&& item : m_items)
+		for (auto&& object : m_objects)
 		{
-			item->hitEventLR(duck);
+			object->hitEventLR(duck);
+		}
+		for (auto&& greenOnion : m_greenOnions)
+		{
+			greenOnion.hitEventLR(duck);
 		}
 	}
 
@@ -127,7 +154,7 @@ void RamenBowl::checkSwimming(Duck& duck, const dss::InputState& input)
 			if (input.upPressed)
 			{
 				duck.floatUp();
-				duck.moveY(-duck.hitRegion().h);
+				duck.moveY(m_GameArea.topY() - duck.bottomY());
 				return;
 			}
 		}
@@ -142,9 +169,21 @@ void RamenBowl::checkSwimming(Duck& duck, const dss::InputState& input)
 		{
 			noodle.hitEventTB(duck);
 		}
-		for (auto&& item : m_items)
+		for (auto&& object : m_objects)
 		{
-			item->hitEventTB(duck);
+			object->hitEventTB(duck);
+		}
+		for (auto&& greenOnion : m_greenOnions)
+		{
+			greenOnion.hitEventTB(duck);
 		}
 	}
+
+	duck.consumeStamina(staminaDecreaseSpeed * Scene::DeltaTime());
+}
+
+
+bool RamenBowl::isCompleted() const
+{
+	return m_greenOnions.isEmpty();
 }

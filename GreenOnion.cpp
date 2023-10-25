@@ -31,6 +31,8 @@ void GreenOnion::hitEventLR(Duck& duck)
 
 	if (isHit(duck))
 	{
+		duck.getGreenOnion();
+
 		kill();
 	}
 }
@@ -44,6 +46,8 @@ void GreenOnion::hitEventTB(Duck& duck)
 
 	if (isHit(duck))
 	{
+		duck.getGreenOnion();
+
 		kill();
 	}
 }
