@@ -35,8 +35,6 @@ void Game::draw() const
 	player.draw();
 
 	drawStamina();
-
-	FontAsset(U"font")(Format(score)).draw(Arg::topRight = Vec2{ Scene::Width() - 20, 20 }, Palette::White);
 }
 
 void Game::drawStamina() const

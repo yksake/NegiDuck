@@ -9,8 +9,6 @@ void Main()
 	Scene::SetResizeMode(ResizeMode::Actual);
 	Scene::SetBackground(Color{ 34, 32, 52 });
 
-	FontAsset::Register(U"font", 24);
-
 	MyApp manager;
 	manager
 		.add<Title>(State::Title)
