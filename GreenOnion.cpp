@@ -1,6 +1,6 @@
 ﻿#include "GreenOnion.hpp"
 
-GreenOnion::GreenOnion(const Vec2& pos) : Ingredient(pos, m_Size)
+GreenOnion::GreenOnion(const Vec2& pos) : Ingredient(pos, Vec2{ 50, 50 })
 {
 
 }
@@ -18,7 +18,7 @@ void GreenOnion::draw() const
 		return;
 	}
 
-	Circle{m_pos, m_Size.x / 2}.drawFrame(8, 0, Palette::Limegreen);
+	Circle{m_pos, m_viewSize.x / 2}.drawFrame(8, 0, Palette::Limegreen);
 }
 
 

@@ -17,5 +17,5 @@ public:
 
 
 private:
-	static constexpr SizeF m_Size = { 50, 50 };
+
 };

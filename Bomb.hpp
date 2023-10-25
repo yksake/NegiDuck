@@ -17,8 +17,7 @@ public:
 
 
 private:
-	static constexpr SizeF m_Size = { 50, 50 };
-	static constexpr double m_RejectSpeed = 9;
+	static const double m_RejectSpeed;
 	bool m_isActive = true;
 	Timer m_animationTimer{ Duration{ 1.0 } };
 };

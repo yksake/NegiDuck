@@ -1,6 +1,10 @@
 ﻿#include "Duck.hpp"
 
-Duck::Duck(const Vec2& pos) : GameObject(pos, m_HitSize, m_ViewSize)
+const double Duck::m_Registance = 0.95;
+const double Duck::m_MaxStamina = 100;
+
+
+Duck::Duck(const Vec2& pos) : GameObject(pos, Vec2{ 50, 60 }, Vec2{ 70, 70 })
 {
 	m_texture = Texture{ U"🦆"_emoji };
 }
@@ -13,11 +17,31 @@ void Duck::update(const dss::InputState& input)
 		return;
 	}
 
+	if (m_recoveryTimer.reachedZero())
+	{
+		m_recoveryTimer.reset();
+	}
+
+	if (not input.leftStick.isZero())
+	{
+		m_lastLeftStick = input.leftStick;
+	}
+
 	const Vec2 previousVelocity = m_velocity;
 	m_velocity = Vec2::Zero();
 
 	updateMove(input.leftStick);
 
+	if (input.applyDown)
+	{
+		dash();
+	}
+
+	m_environmentalSpeed *= m_Registance * Scene::DeltaTime() / (1.0 / 60.0);
+
+	m_velocity = m_speed + m_environmentalSpeed;
+
+	/*
 	if (m_velocity.x < 0)
 	{
 		if (0 <= previousVelocity.x)
@@ -39,23 +63,23 @@ void Duck::update(const dss::InputState& input)
 			m_animationTimer.reset();
 		}
 	}
+	*/
 }
 
 void Duck::updateMove(const Vec2& leftStick)
 {
 	const double moveSpeed = 7.0;
 	const double terminalSpeed = 3.0;
-	const double registance = 0.95;
 	
 	m_speed += leftStick * moveSpeed * Scene::DeltaTime();
 
 	if (leftStick.x == 0)
 	{
-		m_speed.x *= registance * Scene::DeltaTime() / (1.0 / 60.0);
+		m_speed.x *= m_Registance * Scene::DeltaTime() / (1.0 / 60.0);
 	}
 	if (leftStick.y == 0)
 	{
-		m_speed.y *= registance * Scene::DeltaTime() / (1.0 / 60.0);
+		m_speed.y *= m_Registance * Scene::DeltaTime() / (1.0 / 60.0);
 	}
 
 	if (terminalSpeed < m_speed.length())
@@ -63,11 +87,6 @@ void Duck::updateMove(const Vec2& leftStick)
 		m_speed.setLength(terminalSpeed);
 	}
 
-	m_environmentalSpeed *= registance * Scene::DeltaTime() / (1.0 / 60.0);
-
-	m_velocity = m_speed + m_environmentalSpeed;
-
-	// Set Direction
 	if (leftStick.x < 0)
 	{
 		m_isRight = false;
@@ -77,6 +96,45 @@ void Duck::updateMove(const Vec2& leftStick)
 		m_isRight = true;
 	}
 }
+
+void Duck::dash()
+{
+	if (m_isFloating)
+	{
+		return;
+	}
+	if (m_recoveryTimer.isRunning())
+	{
+		return;
+	}
+
+	const double dashSpeed = 10;
+	const double staminaDecrease = 10;
+
+	if (m_stamina < staminaDecrease)
+	{
+		return;
+	}
+
+	if (m_lastLeftStick.isZero())
+	{
+		if (m_isRight)
+		{
+			m_lastLeftStick = { 1, 0 };
+		}
+		else
+		{
+			m_lastLeftStick = { -1, 0 };
+		}
+	}
+
+	m_environmentalSpeed += m_lastLeftStick * dashSpeed;
+
+	m_stamina -= staminaDecrease;
+
+	m_recoveryTimer.restart();
+}
+
 
 void Duck::draw() const
 {

@@ -41,13 +41,14 @@ void Game::draw() const
 
 void Game::drawStamina() const
 {
-	const RectF gauge = { 20, 20, 400, 40 };
+	const Vec2 pos = { 20, 20 };
+	const double width = 400;
+	const double height = 40;
 
-	gauge
+	RectF{ pos, width, height }
 		.draw(Color{ 87, 35, 0 })
 		.drawFrame(0, 3, Palette::White);
 
-	gauge
-		.stretched(0, -gauge.w * (1.0 - player.staminaPercentage()), 0, 0)
+	RectF{ pos, width * Clamp(player.staminaPercentage(), 0.0, 1.0), height }
 		.draw(Palette::Darkturquoise);
 }

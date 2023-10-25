@@ -1,5 +1,8 @@
 ﻿#include "Noodle.hpp"
 
+const double Noodle::m_BoundSpeed = 7;
+
+
 Noodle::Noodle(const Vec2& pos, const SizeF& size) : Ingredient(pos, size)
 {
 

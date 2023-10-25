@@ -1,8 +1,10 @@
 ﻿#include "RamenBowl.hpp"
 #include "Bomb.hpp"
 
-RamenBowl::RamenBowl()
+RamenBowl::RamenBowl(const RectF& area)
 {
+	m_gameArea = area;
+
 	m_noodles << Noodle{ Scene::CenterF() + Vec2{100, 50}, SizeF{20, 100} };
 
 	m_greenOnions << GreenOnion{ Scene::CenterF() - Vec2{200, 0} };
@@ -29,7 +31,7 @@ void RamenBowl::update()
 
 void RamenBowl::draw() const
 {
-	m_GameArea.drawFrame(0, 5, Palette::White);
+	m_gameArea.drawFrame(0, 5, Palette::White);
 
 	m_spoon.draw();
 
@@ -69,15 +71,15 @@ void RamenBowl::checkFloating(Duck& duck, const dss::InputState& input)
 	{
 		duck.moveX(duck.velocity().x);
 
-		if (duck.leftX() < m_GameArea.leftX())
+		if (duck.leftX() < m_gameArea.leftX())
 		{
-			duck.moveX(m_GameArea.leftX() - duck.leftX());
+			duck.moveX(m_gameArea.leftX() - duck.leftX());
 			duck.setSpeedX(0);
 			duck.setEnvironmentalSpeedX(0);
 		}
-		else if (m_GameArea.rightX() < duck.rightX())
+		else if (m_gameArea.rightX() < duck.rightX())
 		{
-			duck.moveX(m_GameArea.rightX() - duck.rightX());
+			duck.moveX(m_gameArea.rightX() - duck.rightX());
 			duck.setSpeedX(0);
 			duck.setEnvironmentalSpeedX(0);
 		}
@@ -88,8 +90,9 @@ void RamenBowl::checkFloating(Duck& duck, const dss::InputState& input)
 		if (input.downPressed)
 		{
 			duck.diveDown();
-			duck.moveY(m_GameArea.topY() - duck.topY());
+			duck.moveY(m_gameArea.topY() - duck.topY());
 			duck.setSpeedY(0);
+			duck.setEnvironmentalSpeed(Vec2::Zero());
 			return;
 		}
 	}
@@ -114,15 +117,15 @@ void RamenBowl::checkSwimming(Duck& duck, const dss::InputState& input)
 	{
 		duck.moveX(duck.velocity().x);
 
-		if (duck.leftX() < m_GameArea.leftX())
+		if (duck.leftX() < m_gameArea.leftX())
 		{
-			duck.moveX(m_GameArea.leftX() - duck.leftX());
+			duck.moveX(m_gameArea.leftX() - duck.leftX());
 			duck.setSpeedX(0);
 			duck.setEnvironmentalSpeedX(0);
 		}
-		else if (m_GameArea.rightX() < duck.rightX())
+		else if (m_gameArea.rightX() < duck.rightX())
 		{
-			duck.moveX(m_GameArea.rightX() - duck.rightX());
+			duck.moveX(m_gameArea.rightX() - duck.rightX());
 			duck.setSpeedX(0);
 			duck.setEnvironmentalSpeedX(0);
 		}
@@ -145,22 +148,22 @@ void RamenBowl::checkSwimming(Duck& duck, const dss::InputState& input)
 	{
 		duck.moveY(duck.velocity().y);
 
-		if (duck.topY() < m_GameArea.topY())
+		if (duck.topY() < m_gameArea.topY())
 		{
-			duck.moveY(m_GameArea.topY() - duck.topY());
+			duck.moveY(m_gameArea.topY() - duck.topY());
 			duck.setSpeedY(0);
 			duck.setEnvironmentalSpeedY(0);
 
 			if (input.upPressed)
 			{
 				duck.floatUp();
-				duck.moveY(m_GameArea.topY() - duck.bottomY());
+				duck.moveY(m_gameArea.topY() - duck.bottomY());
 				return;
 			}
 		}
-		else if (m_GameArea.bottomY() < duck.bottomY())
+		else if (m_gameArea.bottomY() < duck.bottomY())
 		{
-			duck.moveY(m_GameArea.bottomY() - duck.bottomY());
+			duck.moveY(m_gameArea.bottomY() - duck.bottomY());
 			duck.setSpeedY(0);
 			duck.setEnvironmentalSpeedY(0);
 		}

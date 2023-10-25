@@ -1,6 +1,9 @@
 ﻿#include "Bomb.hpp"
 
-Bomb::Bomb(const Vec2& pos) : Ingredient(pos, m_Size)
+const double Bomb::m_RejectSpeed = 9;
+
+
+Bomb::Bomb(const Vec2& pos) : Ingredient(pos, Vec2{ 50, 50 })
 {
 	m_texture = Texture{ U"💣"_emoji };
 }

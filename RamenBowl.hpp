@@ -7,7 +7,7 @@
 class RamenBowl
 {
 public:
-	RamenBowl();
+	RamenBowl(const RectF& area);
 
 	void update();
 	void draw() const;
@@ -18,12 +18,12 @@ public:
 
 
 private:
+	RectF m_gameArea;
+
 	ChineseSpoon m_spoon{ Vec2{ 1030, 75 } };
 	Array<Noodle> m_noodles;
 	Array<GreenOnion> m_greenOnions;
 	Array<std::unique_ptr<Ingredient>> m_objects;
-
-	static constexpr RectF m_GameArea = { 100, 100, 1080, 520 };
 
 
 	void checkFloating(Duck& duck, const dss::InputState& input);

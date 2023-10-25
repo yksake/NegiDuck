@@ -13,7 +13,7 @@ public:
 
 
 private:
-	RamenBowl bowl;
+	RamenBowl bowl{ Scene::Rect().stretched(-100) };
 	Duck player{ Scene::CenterF() };
 
 	uint8 score = 0;

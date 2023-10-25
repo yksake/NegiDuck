@@ -1,6 +1,6 @@
 ﻿#include "ChineseSpoon.hpp"
 
-ChineseSpoon::ChineseSpoon(const Vec2& pos) : GameObject(pos, m_Size)
+ChineseSpoon::ChineseSpoon(const Vec2& pos) : GameObject(pos, Vec2{ 100, 50 })
 {
 	m_texture = Texture{ U"img/renge_spoon.png" };
 }

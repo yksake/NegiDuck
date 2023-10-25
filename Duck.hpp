@@ -40,23 +40,25 @@ public:
 
 
 private:
-	static constexpr SizeF m_HitSize = { 50, 60 };
-	static constexpr SizeF m_ViewSize = { 70, 70 };
 	Size m_clipSize = { 12, 12 };
 
 	Vec2 m_speed = Vec2::Zero();
 	Vec2 m_environmentalSpeed = Vec2::Zero();
 	Vec2 m_velocity = Vec2::Zero();
+	static const double m_Registance;
+	Vec2 m_lastLeftStick = Vec2::Zero();
 
 	bool m_isFloating = false;
 	bool m_isRight = true;
 
-	static constexpr double m_MaxStamina = 100;
+	static const double m_MaxStamina;
 	double m_stamina = m_MaxStamina;
 	uint8 m_greenOnionCnt = 0;
 
+	Timer m_recoveryTimer{ Duration{ 1.0 } };
 	Stopwatch m_animationTimer;
 
 
 	void updateMove(const Vec2& leftStick);
+	void dash();
 };
