@@ -1,12 +1,6 @@
 ﻿#pragma once
-#include <Siv3D.hpp>
+#include "SceneState.hpp"
 #include "Input/InputManager.hpp"
-
-enum class State
-{
-	Title,
-	Game
-};
 
 struct Common
 {

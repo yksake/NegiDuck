@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Common.hpp"
+#include "MenuManager.hpp"
 #include "RamenBowl.hpp"
 #include "Duck.hpp"
 
@@ -13,11 +14,16 @@ public:
 
 
 private:
-	RamenBowl bowl{ Scene::Rect().stretched(-100) };
+	MenuManager menu{ InitType::Pause, Scene::Rect() };
+
+	RamenBowl bowl{ 0, Scene::Rect() };
 	Duck player{ Scene::CenterF() };
 
-	uint8 score = 0;
+	uint8 stageCnt = 0;
 
 
 	void drawStamina() const;
+
+	void retry();
+	void changeNextStage();
 };

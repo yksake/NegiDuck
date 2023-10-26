@@ -1,17 +1,17 @@
-﻿#include "Title.hpp"
+﻿#include "Result.hpp"
 
-Title::Title(const InitData& init) : IScene(init)
+Result::Result(const InitData& init) : IScene(init)
 {
 	menu.openMenu();
 }
 
-Title::~Title()
+Result::~Result()
 {
-	
+
 }
 
 
-void Title::update()
+void Result::update()
 {
 	getData().input.beginFrame();
 
@@ -32,8 +32,7 @@ void Title::update()
 	}
 }
 
-
-void Title::draw() const
+void Result::draw() const
 {
 	menu.draw();
 }

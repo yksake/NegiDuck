@@ -7,7 +7,7 @@
 class RamenBowl
 {
 public:
-	RamenBowl(const RectF& area);
+	RamenBowl(const uint8 stageNum, const RectF& area);
 
 	void update();
 	void draw() const;
@@ -15,6 +15,9 @@ public:
 	void check(Duck& duck, const dss::InputState& input);
 
 	bool isCompleted() const;
+
+	void pause();
+	void resume();
 
 
 private:
@@ -25,6 +28,8 @@ private:
 	Array<GreenOnion> m_greenOnions;
 	Array<std::unique_ptr<Ingredient>> m_objects;
 
+
+	void cook(const uint8 stageNum);
 
 	void checkFloating(Duck& duck, const dss::InputState& input);
 	void checkSwimming(Duck& duck, const dss::InputState& input);

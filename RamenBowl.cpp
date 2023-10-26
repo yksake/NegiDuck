@@ -1,15 +1,27 @@
 ﻿#include "RamenBowl.hpp"
 #include "Bomb.hpp"
 
-RamenBowl::RamenBowl(const RectF& area)
+RamenBowl::RamenBowl(const uint8 stageNum, const RectF& area)
 {
 	m_gameArea = area;
 
-	m_noodles << Noodle{ Scene::CenterF() + Vec2{100, 50}, SizeF{20, 100} };
+	m_noodles.clear();
+	m_greenOnions.clear();
+	m_objects.clear();
 
-	m_greenOnions << GreenOnion{ Scene::CenterF() - Vec2{200, 0} };
+	cook(stageNum);
+}
 
-	m_objects << std::make_unique<Bomb>(Scene::CenterF() - Vec2{ 0, 200 });
+void RamenBowl::cook(const uint8 stageNum)
+{
+	if (stageNum == 0)
+	{
+		m_noodles << Noodle{ Scene::CenterF() + Vec2{100, 50}, SizeF{20, 100} };
+
+		m_greenOnions << GreenOnion{ Scene::CenterF() - Vec2{200, 0} };
+
+		m_objects << std::make_unique<Bomb>(Scene::CenterF() - Vec2{ 0, 200 });
+	}
 }
 
 
@@ -189,4 +201,35 @@ void RamenBowl::checkSwimming(Duck& duck, const dss::InputState& input)
 bool RamenBowl::isCompleted() const
 {
 	return m_greenOnions.isEmpty();
+}
+
+
+void RamenBowl::pause()
+{
+	m_spoon.pause();
+
+	for (auto&& greenOnion : m_greenOnions)
+	{
+		greenOnion.pause();
+	}
+
+	for (auto&& object : m_objects)
+	{
+		object->pause();
+	}
+}
+
+void RamenBowl::resume()
+{
+	m_spoon.resume();
+
+	for (auto&& greenOnion : m_greenOnions)
+	{
+		greenOnion.resume();
+	}
+
+	for (auto&& object : m_objects)
+	{
+		object->resume();
+	}
 }

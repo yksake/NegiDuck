@@ -2,15 +2,15 @@
 #include "Common.hpp"
 #include "MenuManager.hpp"
 
-class Title : public MyApp::Scene
+class Result : public MyApp::Scene
 {
 public:
-	Title(const InitData& init);
-	~Title();
+	Result(const InitData& init);
+	~Result();
 	void update() override;
 	void draw() const override;
 
 
 private:
-	MenuManager menu{ InitType::Main, Scene::Rect() };
+	MenuManager menu{ InitType::Result, Scene::Rect() };
 };
