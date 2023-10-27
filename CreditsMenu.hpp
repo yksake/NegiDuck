@@ -16,6 +16,6 @@ public:
 private:
 	static const Array<String> m_Menus;
 	static const String m_Version;
-	static constexpr Vec2 m_BasePos = { 1110, 200 };
-	static constexpr Vec2 m_VersionRelPos = { 45, 25 };
+	static const Vec2 m_BasePos;
+	static const Vec2 m_VersionRelPos;
 };

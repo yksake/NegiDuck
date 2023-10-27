@@ -1,11 +1,11 @@
 ﻿#include "MainMenu.hpp"
-#include "Font/PixelChicken.hpp"
+#include "Font/PixelCube.hpp"
 
 const Array<String> MainMenu::m_Menus = {
-	U"START",
-	U"CONFIG",
-	U"CREDITS",
-	U"EXIT"
+	U"Start",
+	U"Config",
+	U"Credits",
+	U"Exit"
 };
 
 
@@ -64,14 +64,13 @@ void MainMenu::drawLogo() const
 		return;
 	}
 
-	const uint8 fontSize = 3;
 	const Color color = Palette::White;
 
-	const Vec2 towerPos = { 150, 100 };
-	const Vec2 ovenPos = towerPos + Vec2{ 0, 120 };
+	const Vec2 pos = { 150, 100 };
+	const double interval = 120;
 
-	PixelChicken::Draw(U"NegiDuck:", 3, Arg::topLeft = towerPos, color);
-	PixelChicken::Draw(U"With Chinese Spoon", 2, Arg::topLeft = ovenPos, color);
+	PixelCube::Draw(U"NegiDuck", 8, Arg::topLeft = pos, color);
+	PixelCube::Draw(U"With Chinese Spoon", 5, Arg::topLeft = pos.movedBy(0, interval), color);
 }
 
 void MainMenu::drawIndex() const
@@ -81,12 +80,12 @@ void MainMenu::drawIndex() const
 		return;
 	}
 
-	const uint8 fontSize = 2;
+	const uint8 fontSize = 5;
 	const Color defaultColor{ 128 };
 	const Color selectedColor = Palette::White;
 
-	Vec2 pos = { 190, 350 };
-	const double interval = 70;
+	Vec2 pos = { 206, 350 };
+	const double interval = 80;
 
 	for (uint8 i = 0; i < m_Menus.size(); i++)
 	{
@@ -97,7 +96,7 @@ void MainMenu::drawIndex() const
 			color = selectedColor;
 		}
 
-		PixelChicken::Draw(m_Menus[i], fontSize, Arg::topLeft = pos, color);
+		PixelCube::Draw(m_Menus[i], fontSize, Arg::topLeft = pos, color);
 
 		pos.y += interval;
 	}

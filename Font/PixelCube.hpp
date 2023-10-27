@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <Siv3D.hpp>
 
-class PixelChicken
+class PixelCube
 {
 public:
 	static uint8 DefaultSize;
@@ -34,10 +34,10 @@ public:
 
 private:
 	static const String m_FontAssetName;
-	static constexpr uint8 m_BaseSize = 40;
-	static constexpr uint8 m_RightMargin = 5;
-	static constexpr uint8 m_BottomMargin = 5;
+	static const uint8 m_BaseSize = 13;
+	static const uint8 m_RightMargin = 1;
+	static const uint8 m_BottomMargin = 1;
 
 
-	PixelChicken();
+	PixelCube();
 };

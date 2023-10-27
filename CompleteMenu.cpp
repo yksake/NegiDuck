@@ -1,5 +1,5 @@
 ﻿#include "CompleteMenu.hpp"
-#include "Font/PixelChicken.hpp"
+#include "Font/PixelCube.hpp"
 
 CompleteMenu::CompleteMenu(const RectF& area) : AbstractMenu(area)
 {
@@ -35,11 +35,11 @@ void CompleteMenu::draw() const
 	}
 
 	const String text = U"Completed!";
-	const uint8 fontSize = 3;
+	const uint8 fontSize = 8;
 	const Vec2 pos = m_area.center();
 	const Color color = Palette::White;
 
-	PixelChicken::Draw(text, fontSize, Arg::center = pos, color);
+	PixelCube::Draw(text, fontSize, Arg::center = pos, color);
 }
 
 

@@ -1,11 +1,11 @@
 ﻿#include "PauseMenu.hpp"
-#include "Font/PixelChicken.hpp"
+#include "Font/PixelCube.hpp"
 
 const Array<String> PauseMenu::m_Menus = {
-	U"RESUME",
-	U"RETRY",
-	U"CONFIG",
-	U"MAIN MENU"
+	U"Resume",
+	U"Retry",
+	U"Config",
+	U"Main Menu"
 };
 
 
@@ -63,9 +63,9 @@ void PauseMenu::draw() const
 		return;
 	}
 
-	const uint8 fontSize = 2;
+	const uint8 fontSize = 6;
 
-	const double interval = 80;
+	const double interval = 100;
 	Vec2 pos = m_area.center() - Vec2{0, interval * m_MaxIndex * 0.5};
 
 	const Color defaultColor{ 128 };
@@ -80,7 +80,7 @@ void PauseMenu::draw() const
 			color = selectedColor;
 		}
 
-		PixelChicken::Draw(m_Menus[i], fontSize, Arg::center = pos, color);
+		PixelCube::Draw(m_Menus[i], fontSize, Arg::center = pos, color);
 
 		pos.y += interval;
 	}

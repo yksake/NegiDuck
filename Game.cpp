@@ -106,7 +106,7 @@ void Game::draw() const
 
 void Game::drawStamina() const
 {
-	const Vec2 pos = { 20, 20 };
+	const Vec2 pos = { 20, 30 };
 	const double width = 400;
 	const double height = 40;
 
@@ -121,11 +121,11 @@ void Game::drawStamina() const
 
 void Game::retry()
 {
-	const Vec2 playerPos = Scene::CenterF();
+	const Vec2 playerPos = Scene::Rect().topCenter();
 
 	player = Duck{ playerPos };
 
-	bowl = RamenBowl{ stageCnt, Scene::Rect().stretched(-100) };
+	bowl = RamenBowl{ stageCnt, Scene::Rect().stretched(-190, -100, -10, -100) };
 }
 
 void Game::changeNextStage()

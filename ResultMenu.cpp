@@ -1,5 +1,5 @@
 ﻿#include "ResultMenu.hpp"
-#include "Font/PixelChicken.hpp"
+#include "Font/PixelCube.hpp"
 
 ResultMenu::ResultMenu(const RectF& area) : AbstractMenu(area)
 {
@@ -36,11 +36,11 @@ void ResultMenu::draw() const
 	}
 
 	const String text = U"Result";
-	const uint8 fontSize = 3;
+	const uint8 fontSize = 8;
 	const Vec2 pos = m_area.center();
 	const Color color = Palette::White;
 
-	PixelChicken::Draw(text, fontSize, Arg::center = pos, color);
+	PixelCube::Draw(text, fontSize, Arg::center = pos, color);
 }
 
 

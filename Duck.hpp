@@ -48,7 +48,7 @@ private:
 	static const double m_Registance;
 	Vec2 m_lastLeftStick = Vec2::Zero();
 
-	bool m_isFloating = false;
+	bool m_isFloating = true;
 	bool m_isRight = true;
 
 	static const double m_MaxStamina;

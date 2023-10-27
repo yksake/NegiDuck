@@ -42,6 +42,7 @@ void Bomb::hitEventLR(Duck& duck)
 
 		duck.setSpeed(Vec2::Zero());
 		duck.setEnvironmentalSpeed(reject);
+		duck.consumeStamina(20);
 
 		m_texture = Texture{ U"💥"_emoji };
 		m_animationTimer.start();
@@ -63,6 +64,7 @@ void Bomb::hitEventTB(Duck& duck)
 
 		duck.setSpeed(Vec2::Zero());
 		duck.setEnvironmentalSpeed(reject);
+		duck.consumeStamina(20);
 
 		m_texture = Texture{ U"💥"_emoji };
 		m_animationTimer.start();

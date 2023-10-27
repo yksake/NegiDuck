@@ -7,13 +7,13 @@ void Main()
 {
 	System::SetTerminationTriggers(UserAction::CloseButtonClicked);
 
-	Window::SetTitle(U"レンゲ背負ってやってきた！");
+	Window::SetTitle(U"ネギダック");
 	Window::ResizeActual(DisplayResolution::HD_1280x720);
 
 	Scene::SetResizeMode(ResizeMode::Actual);
 	Scene::SetBackground(Color{ 34, 32, 52 });
 
-	FontAsset::Register(U"font", 120, U"font/x8y4PixelChicken.ttf", FontStyle::Bitmap);
+	FontAsset::Register(U"PixelCube", 65, U"font/x7y13PixelCube.ttf", FontStyle::Bitmap);
 
 	MyApp manager;
 	manager

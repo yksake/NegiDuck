@@ -1,5 +1,5 @@
 ﻿#include "ConfigMenu.hpp"
-#include "Font/PixelChicken.hpp"
+#include "Font/PixelCube.hpp"
 
 ConfigMenu::ConfigMenu(const RectF& area) : AbstractMenu(area)
 {
@@ -45,18 +45,18 @@ void ConfigMenu::draw() const
 
 	{
 		const String text = U"This is Config";
-		const uint8 fontSize = 2;
+		const uint8 fontSize = 5;
 		const Vec2 pos = m_area.center() - Vec2{ 0, 60 };
 
-		PixelChicken::Draw(text, fontSize, Arg::center = pos, color);
+		PixelCube::Draw(text, fontSize, Arg::center = pos, color);
 	}
 
 	{
 		const String text = U"COMING SOON";
-		const uint8 fontSize = 3;
+		const uint8 fontSize = 8;
 		const Vec2 pos = m_area.center() + Vec2{ 0, 50 };
 
-		PixelChicken::Draw(text, fontSize, Arg::center = pos, color);
+		PixelCube::Draw(text, fontSize, Arg::center = pos, color);
 	}
 }
 

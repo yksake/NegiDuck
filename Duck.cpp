@@ -138,15 +138,6 @@ void Duck::dash()
 
 void Duck::draw() const
 {
-	if (m_isFloating)
-	{
-		hitRegion().draw(Color{ 255, 0, 0, 100 });
-	}
-	else
-	{
-		hitRegion().draw(Color{ 0, 0, 255, 100 });
-	}
-
 	viewRegion()(m_texture.mirrored(m_isRight)).draw();
 }
 

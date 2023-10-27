@@ -23,7 +23,7 @@ public:
 private:
 	RectF m_gameArea;
 
-	ChineseSpoon m_spoon{ Vec2{ 1030, 75 } };
+	ChineseSpoon m_spoon{ Vec2{ 1030, 165 } };
 	Array<Noodle> m_noodles;
 	Array<GreenOnion> m_greenOnions;
 	Array<std::unique_ptr<Ingredient>> m_objects;

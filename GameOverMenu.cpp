@@ -1,9 +1,9 @@
 ﻿#include "GameOverMenu.hpp"
-#include "Font/PixelChicken.hpp"
+#include "Font/PixelCube.hpp"
 
 const Array<String> GameOverMenu::m_Menus = {
-	U"RETRY",
-	U"MAIN MENU"
+	U"Retry",
+	U"Main Menu"
 };
 
 
@@ -67,11 +67,11 @@ void GameOverMenu::drawTitle() const
 	}
 
 	const String title = U"GAME OVER";
-	const uint8 fontSize = 3;
+	const uint8 fontSize = 8;
 	const Vec2 pos = m_area.center();
 	const Color color = Palette::White;
 
-	PixelChicken::Draw(title, fontSize, Arg::bottomCenter = pos, color);
+	PixelCube::Draw(title, fontSize, Arg::bottomCenter = pos, color);
 }
 
 void GameOverMenu::drawIndex() const
@@ -81,11 +81,11 @@ void GameOverMenu::drawIndex() const
 		return;
 	}
 
-	const uint8 fontSize = 2;
+	const uint8 fontSize = 6;
 	const Color defaultColor{ 128 };
 	const Color selectedColor = Palette::White;
 
-	const double interval = 80;
+	const double interval = 100;
 
 	Vec2 pos = m_area.center();
 	pos.y += interval * 0.75;
@@ -99,7 +99,7 @@ void GameOverMenu::drawIndex() const
 			color = selectedColor;
 		}
 
-		PixelChicken::Draw(m_Menus[i], fontSize, Arg::topCenter = pos, color);
+		PixelCube::Draw(m_Menus[i], fontSize, Arg::topCenter = pos, color);
 
 		pos.y += interval;
 	}

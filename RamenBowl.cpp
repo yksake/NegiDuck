@@ -5,22 +5,30 @@ RamenBowl::RamenBowl(const uint8 stageNum, const RectF& area)
 {
 	m_gameArea = area;
 
-	m_noodles.clear();
-	m_greenOnions.clear();
-	m_objects.clear();
-
 	cook(stageNum);
 }
 
 void RamenBowl::cook(const uint8 stageNum)
 {
+	m_noodles.clear();
+	m_greenOnions.clear();
+	m_objects.clear();
+
 	if (stageNum == 0)
 	{
-		m_noodles << Noodle{ Scene::CenterF() + Vec2{100, 50}, SizeF{20, 100} };
+		m_spoon = ChineseSpoon{ m_gameArea.tr().movedBy(-50, -25) };
 
-		m_greenOnions << GreenOnion{ Scene::CenterF() - Vec2{200, 0} };
+		m_noodles << Noodle{ m_gameArea.center() + Vec2{250, 0}, SizeF{20, 200}};
+		m_noodles << Noodle{ Vec2{450, 460}, SizeF{300, 20} };
 
-		m_objects << std::make_unique<Bomb>(Scene::CenterF() - Vec2{ 0, 200 });
+		m_greenOnions << GreenOnion{ m_gameArea.center() - Vec2{200, 100}};
+		m_greenOnions << GreenOnion{ m_gameArea.center() + Vec2{-420, 180} };
+		m_greenOnions << GreenOnion{ Vec2{760, 430} };
+		m_greenOnions << GreenOnion{ Vec2{1005, 540} };
+
+		m_objects << std::make_unique<Bomb>(m_gameArea.center() - Vec2{400, 180});
+		m_objects << std::make_unique<Bomb>(Vec2{ 665, 620 });
+		m_objects << std::make_unique<Bomb>(Vec2{ 1080, 370 });
 	}
 }
 
@@ -99,6 +107,8 @@ void RamenBowl::checkFloating(Duck& duck, const dss::InputState& input)
 
 	// Move Y
 	{
+		duck.moveY(m_gameArea.topY() - duck.bottomY());
+
 		if (input.downPressed)
 		{
 			duck.diveDown();

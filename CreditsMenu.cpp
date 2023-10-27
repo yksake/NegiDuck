@@ -1,15 +1,17 @@
 ﻿#include "CreditsMenu.hpp"
-#include "Font/PixelChicken.hpp"
+#include "Font/PixelCube.hpp"
 
 const Array<String> CreditsMenu::m_Menus = {
-	U"@DEVELOPED BY",
-	U"DESSERT SEED STUDIO",
+	U"@Developed by",
+	U"Dessert Seed Studio",
 	U"",
-	U"@PROGRAMMING AND GRAPHIC",
-	U"LARGE C"
+	U"@Programming and Graphic",
+	U"LargeC"
 };
 
-const String CreditsMenu::m_Version = U"VERSION 2.0.0-BETA.1";
+const String CreditsMenu::m_Version = U"Version 0.3.0";
+const Vec2 CreditsMenu::m_BasePos = { 1110, 160 };
+const Vec2 CreditsMenu::m_VersionRelPos = { 45, 25 };
 
 
 CreditsMenu::CreditsMenu(const RectF& area) : AbstractMenu(area)
@@ -59,29 +61,29 @@ void CreditsMenu::draw() const
 		if (menu.starts_with(U"@"))
 		{
 			String text = menu;
-			const uint8 fontSize = 1;
+			const uint8 fontSize = 4;
 			const Color color{ 128 };
-			const double interval = 45;
+			const double interval = 65;
 
 			text.pop_front();
 
-			PixelChicken::Draw(text, fontSize, Arg::topRight = pos, color);
+			PixelCube::Draw(text, fontSize, Arg::topRight = pos, color);
 
 			pos.y += interval;
 		}
 		else if (menu.isEmpty())
 		{
-			const double interval = 35;
+			const double interval = 60;
 
 			pos.y += interval;
 		}
 		else
 		{
-			const uint8 fontSize = 2;
+			const uint8 fontSize = 6;
 			const Color color = Palette::White;
 			const double interval = 90;
 
-			PixelChicken::Draw(menu, fontSize, Arg::topRight = pos, color);
+			PixelCube::Draw(menu, fontSize, Arg::topRight = pos, color);
 
 			pos.y += interval;
 		}
@@ -89,11 +91,11 @@ void CreditsMenu::draw() const
 
 	// Version
 	{
-		const uint8 fontSize = 1;
+		const uint8 fontSize = 4;
 		const Vec2 versionPos = Scene::Size() - m_VersionRelPos;
 		const Color color{ 128 };
 
-		PixelChicken::Draw(m_Version, fontSize, Arg::bottomRight = versionPos, color);
+		PixelCube::Draw(m_Version, fontSize, Arg::bottomRight = versionPos, color);
 	}
 }
 
