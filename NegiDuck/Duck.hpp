@@ -35,6 +35,8 @@ public:
 	void getGreenOnion();
 	uint8 putGreenOnion();
 
+	void startRecoveryTime(const double& ms = 1.0);
+
 	void pause() override;
 	void resume() override;
 
@@ -56,9 +58,10 @@ private:
 	uint8 m_greenOnionCnt = 0;
 
 	Timer m_recoveryTimer{ Duration{ 1.0 } };
+	Timer m_dashTimer{ Duration{ 1.0 } };
 	Stopwatch m_animationTimer;
 
 
-	void updateMove(const Vec2& leftStick);
+	void updateMove(Vec2 leftStick);
 	void dash();
 };

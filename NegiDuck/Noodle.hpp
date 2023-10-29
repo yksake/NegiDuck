@@ -18,4 +18,5 @@ public:
 
 private:
 	static const double m_BoundSpeed;
+	static const double m_RecoveryTime;
 };

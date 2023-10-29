@@ -37,16 +37,7 @@ void Bomb::hitEventLR(Duck& duck)
 
 	if (isHit(duck))
 	{
-		Vec2 reject = { duck.pos().x - m_pos.x, duck.pos().y - m_pos.y };
-		reject.setLength(m_RejectSpeed);
-
-		duck.setSpeed(Vec2::Zero());
-		duck.setEnvironmentalSpeed(reject);
-		duck.consumeStamina(20);
-
-		m_texture = Texture{ U"💥"_emoji };
-		m_animationTimer.start();
-		m_isActive = false;
+		hitEvent(duck);
 	}
 }
 
@@ -59,17 +50,24 @@ void Bomb::hitEventTB(Duck& duck)
 
 	if (isHit(duck))
 	{
-		Vec2 reject = { duck.pos().x - m_pos.x, duck.pos().y - m_pos.y };
-		reject.setLength(m_RejectSpeed);
-
-		duck.setSpeed(Vec2::Zero());
-		duck.setEnvironmentalSpeed(reject);
-		duck.consumeStamina(20);
-
-		m_texture = Texture{ U"💥"_emoji };
-		m_animationTimer.start();
-		m_isActive = false;
+		hitEvent(duck);
 	}
+}
+
+void Bomb::hitEvent(Duck& duck)
+{
+	const double recoveryTimer = 0.6;
+	Vec2 reject = { duck.pos().x - m_pos.x, duck.pos().y - m_pos.y };
+	reject.setLength(m_RejectSpeed);
+
+	duck.setSpeed(Vec2::Zero());
+	duck.setEnvironmentalSpeed(reject);
+	duck.consumeStamina(20);
+	duck.startRecoveryTime(recoveryTimer);
+
+	m_texture = Texture{ U"💥"_emoji };
+	m_animationTimer.start();
+	m_isActive = false;
 }
 
 

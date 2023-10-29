@@ -20,4 +20,7 @@ private:
 	static const double m_RejectSpeed;
 	bool m_isActive = true;
 	Timer m_animationTimer{ Duration{ 1.0 } };
+
+
+	void hitEvent(Duck& duck);
 };

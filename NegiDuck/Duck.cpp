@@ -21,6 +21,10 @@ void Duck::update(const dss::InputState& input)
 	{
 		m_recoveryTimer.reset();
 	}
+	if (m_dashTimer.reachedZero())
+	{
+		m_dashTimer.reset();
+	}
 
 	if (not input.leftStick.isZero())
 	{
@@ -66,10 +70,15 @@ void Duck::update(const dss::InputState& input)
 	*/
 }
 
-void Duck::updateMove(const Vec2& leftStick)
+void Duck::updateMove(Vec2 leftStick)
 {
 	const double moveSpeed = 7.0;
 	const double terminalSpeed = 3.0;
+
+	if (m_recoveryTimer.isRunning())
+	{
+		leftStick = Vec2::Zero();
+	}
 	
 	m_speed += leftStick * moveSpeed * Scene::DeltaTime();
 
@@ -107,6 +116,10 @@ void Duck::dash()
 	{
 		return;
 	}
+	if (m_dashTimer.isRunning())
+	{
+		return;
+	}
 
 	const double dashSpeed = 10;
 	const double staminaDecrease = 10;
@@ -132,7 +145,7 @@ void Duck::dash()
 
 	m_stamina -= staminaDecrease;
 
-	m_recoveryTimer.restart();
+	m_dashTimer.restart();
 }
 
 
@@ -262,6 +275,12 @@ uint8 Duck::putGreenOnion()
 	m_greenOnionCnt = 0;
 
 	return cnt;
+}
+
+
+void Duck::startRecoveryTime(const double& ms)
+{
+	m_recoveryTimer.restart(Duration{ ms });
 }
 
 
