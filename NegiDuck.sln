@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34202.233
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NegiDuck", "NegiDuck\NegiDuck.vcxproj", "{1B06DC85-2413-4336-B842-04370884313F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1B06DC85-2413-4336-B842-04370884313F}.Debug|x64.ActiveCfg = Debug|x64
+		{1B06DC85-2413-4336-B842-04370884313F}.Debug|x64.Build.0 = Debug|x64
+		{1B06DC85-2413-4336-B842-04370884313F}.Release|x64.ActiveCfg = Release|x64
+		{1B06DC85-2413-4336-B842-04370884313F}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {646D8842-EC36-4080-8C28-72EAFB8C589A}
+	EndGlobalSection
+EndGlobal
