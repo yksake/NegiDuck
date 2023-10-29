@@ -1,8 +1,5 @@
 ﻿#include "Bomb.hpp"
 
-const double Bomb::m_RejectSpeed = 9;
-
-
 Bomb::Bomb(const Vec2& pos) : Ingredient(pos, Vec2{ 50, 50 })
 {
 	m_texture = Texture{ U"💣"_emoji };
@@ -56,9 +53,10 @@ void Bomb::hitEventTB(Duck& duck)
 
 void Bomb::hitEvent(Duck& duck)
 {
-	const double recoveryTimer = 0.6;
+	const double rejectSpeed = 9;
+	const double recoveryTimer = 0.5;
 	Vec2 reject = { duck.pos().x - m_pos.x, duck.pos().y - m_pos.y };
-	reject.setLength(m_RejectSpeed);
+	reject.setLength(rejectSpeed);
 
 	duck.setSpeed(Vec2::Zero());
 	duck.setEnvironmentalSpeed(reject);

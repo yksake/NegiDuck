@@ -1,7 +1,7 @@
 ﻿#include "Noodle.hpp"
 
 const double Noodle::m_BoundSpeed = 7;
-const double Noodle::m_RecoveryTime = 0.2;
+const double Noodle::m_RecoveryTime = 0.15;
 
 
 Noodle::Noodle(const Vec2& pos, const SizeF& size) : Ingredient(pos, size)
