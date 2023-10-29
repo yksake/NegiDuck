@@ -37,12 +37,10 @@ bool PauseMenu::update(const dss::InputState input)
 	if (input.upDown && 0 < m_index)
 	{
 		m_index--;
-		updated = true;
 	}
 	if (input.downDown && m_index < m_MaxIndex)
 	{
 		m_index++;
-		updated = true;
 	}
 
 	if (input.applyDown)

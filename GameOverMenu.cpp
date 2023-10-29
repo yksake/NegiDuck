@@ -9,7 +9,7 @@ const Array<String> GameOverMenu::m_Menus = {
 
 GameOverMenu::GameOverMenu(const RectF& area) : AbstractMenu(area)
 {
-	m_stopwatch.reset();
+	
 }
 
 
@@ -29,12 +29,10 @@ bool GameOverMenu::update(const dss::InputState input)
 	if (input.upDown && 0 < m_index)
 	{
 		m_index--;
-		updated = true;
 	}
 	if (input.downDown && m_index < m_MaxIndex)
 	{
 		m_index++;
-		updated = true;
 	}
 
 	if (input.applyDown)
@@ -106,61 +104,9 @@ void GameOverMenu::drawIndex() const
 }
 
 
-bool GameOverMenu::isActive() const
-{
-	if (m_stopwatch.isRunning() && m_WaitTime <= m_stopwatch.ms())
-	{
-		m_stopwatch.pause();
-	}
-
-	return m_active && m_WaitTime <= m_stopwatch.ms();
-}
-
 MenuState GameOverMenu::state() const
 {
 	return MenuState::GameOver;
-}
-
-
-bool GameOverMenu::open(const uint8 index)
-{
-	if (isActive())
-	{
-		return false;
-	}
-	if (m_stopwatch.isRunning())
-	{
-		return false;
-	}
-
-	m_active = true;
-	m_index = index;
-
-	m_retrying = false;
-
-	m_stopwatch.restart();
-
-	return true;
-}
-
-bool GameOverMenu::open()
-{
-	if (isActive())
-	{
-		return false;
-	}
-	if (m_stopwatch.isRunning())
-	{
-		return false;
-	}
-
-	m_active = true;
-
-	m_retrying = false;
-
-	m_stopwatch.restart();
-
-	return true;
 }
 
 

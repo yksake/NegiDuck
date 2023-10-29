@@ -27,6 +27,7 @@ void Game::update()
 			else if (menu.isOpening())
 			{
 				menu.openMenu();
+				return;
 			}
 			else if (menu.request().has_value())
 			{
@@ -47,10 +48,14 @@ void Game::update()
 
 				player.resume();
 				bowl.resume();
+
+				return;
 			}
 		}
-
-		return;
+		else
+		{
+			return;
+		}
 	}
 	else if (input.pauseDown)
 	{
@@ -62,15 +67,13 @@ void Game::update()
 		return;
 	}
 
-	const bool alive = player.isAlive();
-
 	bowl.update();
 
 	player.update(input);
 
 	bowl.check(player, input);
 
-	if (alive && not player.isAlive())
+	if (not player.isAlive())
 	{
 		menu = MenuManager{ InitType::GameOver, Scene::Rect() };
 		menu.openMenu();
