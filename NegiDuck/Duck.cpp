@@ -4,9 +4,10 @@ const double Duck::m_Registance = 0.95;
 const double Duck::m_MaxStamina = 100;
 
 
-Duck::Duck(const Vec2& pos) : GameObject(pos, Vec2{ 50, 60 }, Vec2{ 70, 70 })
+Duck::Duck(const Vec2& pos) : GameObject(pos, Vec2{ 40, 50 }, Vec2{ 80, 80 })
 {
-	m_texture = Texture{ U"🦆"_emoji };
+	//m_texture = Texture{ U"🦆"_emoji };
+	m_texture = Texture{ U"img/Duck.png" };
 }
 
 
@@ -151,7 +152,15 @@ void Duck::dash()
 
 void Duck::draw() const
 {
-	viewRegion()(m_texture.mirrored(m_isRight)).draw();
+	const Size clipSize = { 16, 16 };
+	Rect clip = { 0, 0, clipSize };
+
+	if (not m_isFloating)
+	{
+		clip.moveBy(clipSize.x, 0);
+	}
+
+	viewRegion()(m_texture(clip).mirrored(m_isRight)).draw();
 }
 
 

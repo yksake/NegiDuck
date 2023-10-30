@@ -42,8 +42,6 @@ public:
 
 
 private:
-	Size m_clipSize = { 12, 12 };
-
 	Vec2 m_speed = Vec2::Zero();
 	Vec2 m_environmentalSpeed = Vec2::Zero();
 	Vec2 m_velocity = Vec2::Zero();
