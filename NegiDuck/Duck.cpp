@@ -4,9 +4,8 @@ const double Duck::m_Registance = 0.95;
 const double Duck::m_MaxStamina = 100;
 
 
-Duck::Duck(const Vec2& pos) : GameObject(pos, Vec2{ 40, 50 }, Vec2{ 80, 80 })
+Duck::Duck(const Vec2& pos) : GameObject(pos, SizeF{ 40, 50 }, SizeF{ 80, 80 })
 {
-	//m_texture = Texture{ U"🦆"_emoji };
 	m_texture = Texture{ U"img/Duck.png" };
 }
 

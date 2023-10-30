@@ -21,7 +21,10 @@ private:
 
 	uint8 stageCnt = 0;
 
+	Texture bubble;
 
+
+	void drawTime() const;
 	void drawStamina() const;
 
 	void retry();

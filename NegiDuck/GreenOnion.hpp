@@ -17,5 +17,5 @@ public:
 
 
 private:
-
+	uint8 m_textureType = 0;
 };

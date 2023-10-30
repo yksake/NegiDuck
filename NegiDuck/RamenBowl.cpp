@@ -18,7 +18,7 @@ void RamenBowl::cook(const uint8 stageNum)
 
 	if (stageNum == 0)
 	{
-		m_spoon = ChineseSpoon{ m_gameArea.tr().movedBy(-50, -25) };
+		m_spoon = ChineseSpoon{ m_gameArea.tr().movedBy(-85, 0) };
 
 		m_noodles << Noodle{ m_gameArea.center() + Vec2{250, 0}, SizeF{20, 200}};
 		m_noodles << Noodle{ Vec2{450, 460}, SizeF{300, 20} };

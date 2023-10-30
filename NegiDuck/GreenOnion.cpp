@@ -1,8 +1,10 @@
 ﻿#include "GreenOnion.hpp"
 
-GreenOnion::GreenOnion(const Vec2& pos) : Ingredient(pos, Vec2{ 50, 50 })
+GreenOnion::GreenOnion(const Vec2& pos) : Ingredient(pos, SizeF{ 45, 50 }, SizeF{ 55, 60 })
 {
+	m_texture = Texture{ U"img/GreenOnion.png" };
 
+	m_textureType = Random(0, 1);
 }
 
 
@@ -18,7 +20,11 @@ void GreenOnion::draw() const
 		return;
 	}
 
-	Circle{m_pos, m_viewSize.x / 2}.drawFrame(8, 0, Palette::Limegreen);
+	const Size clipSize = { 11, 12 };
+	Rect clip = { 0, 0, clipSize };
+	clip.x = clipSize.x * m_textureType;
+
+	viewRegion()(m_texture(clip)).draw();
 }
 
 

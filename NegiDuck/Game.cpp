@@ -1,8 +1,11 @@
 ﻿#include "Game.hpp"
+#include "Font/PixelCube.hpp"
 
 Game::Game(const InitData& init) : IScene(init)
 {
 	Scene::SetBackground(Palette::White);
+
+	bubble = Texture{ U"img/Bubble.png" };
 
 	retry();
 }
@@ -99,6 +102,7 @@ void Game::draw() const
 
 	player.draw();
 
+	drawTime();
 	drawStamina();
 
 	if (menu.isActive())
@@ -109,6 +113,33 @@ void Game::draw() const
 	}
 }
 
+void Game::drawTime() const
+{
+	const uint8 fontSize = 5;
+	const Color color{ 50 };
+
+	// minute
+	{
+		const Vec2 pos = { 630, 45 };
+
+		PixelCube::Draw(U"00", fontSize, Arg::topRight = pos, color);
+	}
+
+	// colon
+	{
+		const Vec2 pos = { 635, 45 };
+
+		PixelCube::Draw(U":", fontSize, pos, color);
+	}
+
+	// seconds
+	{
+		const Vec2 pos = { 650, 45 };
+
+		PixelCube::Draw(U"00", fontSize, pos, color);
+	}
+}
+
 void Game::drawStamina() const
 {
 	const Vec2 pos = { 20, 210 };
@@ -116,6 +147,8 @@ void Game::drawStamina() const
 	const double height = 485;
 	const Color baseColor{ 172, 50, 50 };
 	const Color airColor{ 95, 205, 228 };
+
+	bubble.scaled(5).draw(Vec2{ 20, 160 });
 
 	RectF{ pos, width, height }.draw(baseColor);
 

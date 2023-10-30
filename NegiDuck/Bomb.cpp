@@ -1,8 +1,8 @@
 ﻿#include "Bomb.hpp"
 
-Bomb::Bomb(const Vec2& pos) : Ingredient(pos, Vec2{ 50, 50 })
+Bomb::Bomb(const Vec2& pos) : Ingredient(pos, SizeF{ 50, 50 }, SizeF{ 70, 70 })
 {
-	m_texture = Texture{ U"💣"_emoji };
+	m_texture = Texture{ U"img/Bomb.png" };
 }
 
 
@@ -21,7 +21,15 @@ void Bomb::draw() const
 		return;
 	}
 
-	viewRegion()(m_texture).draw();
+	const Size clipSize = { 14, 14 };
+	Rect clip = { 0, 0, clipSize };
+
+	if (m_animationTimer.isStarted())
+	{
+		clip.moveBy(clipSize.x, 0);
+	}
+
+	viewRegion()(m_texture(clip)).draw();
 }
 
 
@@ -63,8 +71,7 @@ void Bomb::hitEvent(Duck& duck)
 	duck.consumeStamina(20);
 	duck.startRecoveryTime(recoveryTimer);
 
-	m_texture = Texture{ U"💥"_emoji };
-	m_animationTimer.start();
+	m_animationTimer.restart();
 	m_isActive = false;
 }
 

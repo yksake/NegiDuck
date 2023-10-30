@@ -1,16 +1,14 @@
 ﻿#include "ChineseSpoon.hpp"
 
-ChineseSpoon::ChineseSpoon(const Vec2& pos) : GameObject(pos, Vec2{ 70, 50 })
+ChineseSpoon::ChineseSpoon(const Vec2& pos) : GameObject(pos, SizeF{ 95, 35 }, SizeF{ 205, 145 })
 {
-	m_texture = Texture{ U"img/renge_spoon.png" };
+	m_texture = Texture{ U"img/ChineseSpoon.png" };
 }
 
 
 void ChineseSpoon::draw() const
 {
-	m_texture
-		.scaled(0.35)
-		.drawAt(hitRegion().tl() + Vec2{ 50, 0 });
+	viewRegion()(m_texture).draw();
 }
 
 
