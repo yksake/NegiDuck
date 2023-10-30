@@ -4,9 +4,23 @@ const double Noodle::m_BoundSpeed = 7;
 const double Noodle::m_RecoveryTime = 0.15;
 
 
-Noodle::Noodle(const Vec2& pos, const SizeF& size) : Ingredient(pos, size)
+Noodle::Noodle(const Vec2& pos, const uint8 length, const bool isVertical) : Ingredient(pos, SizeF::Zero())
 {
+	m_texture = Texture{ U"img/Noodle.png" };
 
+	const double thickness = 20;
+	const double baseLength = 40;
+
+	if (isVertical)
+	{
+		m_hitSize = { thickness , baseLength * length };
+	}
+	else
+	{
+		m_hitSize = { baseLength * length, thickness };
+	}
+
+	m_viewSize = m_hitSize;
 }
 
 
@@ -17,7 +31,20 @@ void Noodle::update()
 
 void Noodle::draw() const
 {
-	viewRegion().draw(Palette::Lemonchiffon);
+	const ScopedRenderStates2D sampler{ SamplerState::RepeatNearest };
+
+	if (m_viewSize.x < m_viewSize.y)
+	{
+		const SizeF mapSize = SizeF{ m_viewSize.y, m_viewSize.x } / 5;
+
+		m_texture.mapped(mapSize).scaled(5).rotated(90_deg).drawAt(m_pos);
+	}
+	else
+	{
+		const SizeF mapSize = m_viewSize / 5;
+
+		m_texture.mapped(mapSize).scaled(5).drawAt(m_pos);
+	}
 }
 
 

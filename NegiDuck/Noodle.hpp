@@ -4,7 +4,7 @@
 class Noodle : public Ingredient
 {
 public:
-	Noodle(const Vec2& pos, const SizeF& size);
+	Noodle(const Vec2& pos, const uint8 length, const bool isVertical);
 
 	void update() override;
 	void draw() const override;

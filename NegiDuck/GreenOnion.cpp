@@ -4,7 +4,7 @@ GreenOnion::GreenOnion(const Vec2& pos) : Ingredient(pos, SizeF{ 45, 50 }, SizeF
 {
 	m_texture = Texture{ U"img/GreenOnion.png" };
 
-	m_textureType = Random(0, 1);
+	m_textureType = Random(0, 3);
 }
 
 
@@ -22,9 +22,10 @@ void GreenOnion::draw() const
 
 	const Size clipSize = { 11, 12 };
 	Rect clip = { 0, 0, clipSize };
-	clip.x = clipSize.x * m_textureType;
+	clip.x = clipSize.x * (m_textureType / 2);
+	const bool isMirrored = m_textureType % 2 == 1;
 
-	viewRegion()(m_texture(clip)).draw();
+	viewRegion()(m_texture(clip).mirrored(isMirrored)).draw();
 }
 
 
