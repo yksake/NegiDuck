@@ -51,7 +51,11 @@ void RamenBowl::update()
 
 void RamenBowl::draw() const
 {
-	m_gameArea.drawFrame(0, 5, Palette::White);
+	// Soup
+	{
+		const Color color{ 224, 184, 159 };
+		m_gameArea.draw(color);
+	}
 
 	m_spoon.draw();
 
