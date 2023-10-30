@@ -238,7 +238,7 @@ double Duck::staminaPercentage() const
 {
 	double percentage = m_stamina / m_MaxStamina;
 
-	return percentage;
+	return Clamp(percentage, 0.0, 1.0);
 }
 
 void Duck::recoverStamina(const double& recover)

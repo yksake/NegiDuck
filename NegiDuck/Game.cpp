@@ -2,6 +2,8 @@
 
 Game::Game(const InitData& init) : IScene(init)
 {
+	Scene::SetBackground(Palette::White);
+
 	retry();
 }
 
@@ -109,16 +111,16 @@ void Game::draw() const
 
 void Game::drawStamina() const
 {
-	const Vec2 pos = { 20, 30 };
-	const double width = 400;
-	const double height = 40;
+	const Vec2 pos = { 20, 210 };
+	const double width = 40;
+	const double height = 485;
+	const Color baseColor{ 172, 50, 50 };
+	const Color airColor{ 95, 205, 228 };
 
-	RectF{ pos, width, height }
-		.draw(Color{ 87, 35, 0 })
-		.drawFrame(0, 3, Palette::White);
+	RectF{ pos, width, height }.draw(baseColor);
 
-	RectF{ pos, width * Clamp(player.staminaPercentage(), 0.0, 1.0), height }
-		.draw(Palette::Darkturquoise);
+	RectF{ pos, width, height * player.staminaPercentage() }
+		.draw(airColor);
 }
 
 
@@ -128,7 +130,7 @@ void Game::retry()
 
 	player = Duck{ playerPos };
 
-	bowl = RamenBowl{ stageCnt, Scene::Rect().stretched(-190, -100, -10, -100) };
+	bowl = RamenBowl{ stageCnt, Scene::Rect().stretched(-185, -80, 0, -80) };
 }
 
 void Game::changeNextStage()

@@ -11,7 +11,6 @@ void Main()
 	Window::ResizeActual(DisplayResolution::HD_1280x720);
 
 	Scene::SetResizeMode(ResizeMode::Actual);
-	Scene::SetBackground(Color{ 34, 32, 52 });
 
 	FontAsset::Register(U"PixelCube", 65, U"font/x7y13PixelCube.ttf", FontStyle::Bitmap);
 

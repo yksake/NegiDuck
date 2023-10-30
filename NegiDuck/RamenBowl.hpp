@@ -21,6 +21,8 @@ public:
 
 
 private:
+	Texture m_raimon;
+
 	RectF m_gameArea;
 
 	ChineseSpoon m_spoon{ Vec2{ 1030, 165 } };

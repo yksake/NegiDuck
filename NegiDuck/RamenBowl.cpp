@@ -3,6 +3,8 @@
 
 RamenBowl::RamenBowl(const uint8 stageNum, const RectF& area)
 {
+	m_raimon = Texture{ U"img/Raimon.png" };
+
 	m_gameArea = area;
 
 	cook(stageNum);
@@ -57,6 +59,18 @@ void RamenBowl::draw() const
 		m_gameArea.draw(color);
 	}
 
+	// Wall
+	{
+		const Color color{ 50 };
+
+		RectF left = { 0, m_gameArea.topY(), m_gameArea.leftX(), m_gameArea.h };
+		left = left.stretched(55, 0, 0, 0);
+		left.draw(color);
+
+		RectF right = left.movedBy(m_gameArea.rightX() - left.leftX(), 0);
+		right.draw(color);
+	}
+
 	m_spoon.draw();
 
 	for (const auto& noodle : m_noodles)
@@ -71,6 +85,8 @@ void RamenBowl::draw() const
 	{
 		greenOnion.draw();
 	}
+
+	m_raimon.scaled(5).draw();
 }
 
 

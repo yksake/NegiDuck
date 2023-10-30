@@ -2,6 +2,8 @@
 
 Title::Title(const InitData& init) : IScene(init)
 {
+	Scene::SetBackground(Color{ 34, 32, 52 });
+
 	menu.openMenu();
 }
 
