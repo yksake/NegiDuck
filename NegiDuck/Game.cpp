@@ -80,6 +80,7 @@ void Game::update()
 
 	if (not player.isAlive())
 	{
+		timer.pause();
 		menu = MenuManager{ InitType::GameOver, Scene::Rect() };
 		menu.openMenu();
 
@@ -88,6 +89,7 @@ void Game::update()
 
 	if (bowl.isCompleted())
 	{
+		timer.pause();
 		menu = MenuManager{ InitType::Complete, Scene::Rect() };
 		menu.openMenu();
 
@@ -107,7 +109,7 @@ void Game::draw() const
 
 	if (menu.isActive())
 	{
-		Scene::Rect().draw(Color{ 34, 32, 52, 100 });
+		Scene::Rect().draw(Color{ 34, 32, 52, 200 });
 
 		menu.draw();
 	}
