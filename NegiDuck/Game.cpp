@@ -5,8 +5,6 @@ Game::Game(const InitData& init) : IScene(init)
 {
 	Scene::SetBackground(Palette::White);
 
-	bubble = Texture{ U"img/Bubble.png" };
-
 	retry();
 }
 
@@ -103,7 +101,7 @@ void Game::draw() const
 	player.draw();
 
 	drawTime();
-	drawStamina();
+	stamina.draw(player.staminaPercentage());
 
 	if (menu.isActive())
 	{
@@ -138,22 +136,6 @@ void Game::drawTime() const
 
 		PixelCube::Draw(U"00", fontSize, pos, color);
 	}
-}
-
-void Game::drawStamina() const
-{
-	const Vec2 pos = { 20, 210 };
-	const double width = 40;
-	const double height = 485;
-	const Color baseColor{ 172, 50, 50 };
-	const Color airColor{ 95, 205, 228 };
-
-	bubble.scaled(5).draw(Vec2{ 20, 160 });
-
-	RectF{ pos, width, height }.draw(baseColor);
-
-	RectF{ pos, width, height * player.staminaPercentage() }
-		.draw(airColor);
 }
 
 

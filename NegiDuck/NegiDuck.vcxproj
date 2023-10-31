@@ -138,6 +138,7 @@
     <ClCompile Include="RamenBowl.cpp" />
     <ClCompile Include="Result.cpp" />
     <ClCompile Include="ResultMenu.cpp" />
+    <ClCompile Include="StaminaGauge.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -363,6 +364,7 @@
     <ClInclude Include="Result.hpp" />
     <ClInclude Include="ResultMenu.hpp" />
     <ClInclude Include="SceneState.hpp" />
+    <ClInclude Include="StaminaGauge.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Title.hpp" />
   </ItemGroup>

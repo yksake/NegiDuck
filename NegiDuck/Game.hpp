@@ -3,6 +3,7 @@
 #include "MenuManager.hpp"
 #include "RamenBowl.hpp"
 #include "Duck.hpp"
+#include "StaminaGauge.hpp"
 
 class Game : public MyApp::Scene
 {
@@ -21,11 +22,10 @@ private:
 
 	uint8 stageCnt = 0;
 
-	Texture bubble;
+	StaminaGauge stamina{ Vec2{20, 160} };
 
 
 	void drawTime() const;
-	void drawStamina() const;
 
 	void retry();
 	void changeNextStage();

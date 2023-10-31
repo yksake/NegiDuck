@@ -151,6 +151,9 @@
     <Filter Include="RamenNoodles">
       <UniqueIdentifier>{43e2a8c7-1069-46aa-9f5b-cf48bcb2cc3e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{2715cdd1-53f3-439b-b1f0-9299eac76846}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -227,6 +230,9 @@
     </ClCompile>
     <ClCompile Include="RamenBowl.cpp">
       <Filter>RamenNoodles</Filter>
+    </ClCompile>
+    <ClCompile Include="StaminaGauge.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -937,6 +943,9 @@
     </ClInclude>
     <ClInclude Include="ChineseSpoon.hpp">
       <Filter>RamenNoodles</Filter>
+    </ClInclude>
+    <ClInclude Include="StaminaGauge.hpp">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
