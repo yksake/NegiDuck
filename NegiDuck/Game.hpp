@@ -3,6 +3,7 @@
 #include "MenuManager.hpp"
 #include "RamenBowl.hpp"
 #include "Duck.hpp"
+#include "RamenTimer.hpp"
 #include "StaminaGauge.hpp"
 
 class Game : public MyApp::Scene
@@ -22,10 +23,9 @@ private:
 
 	uint8 stageCnt = 0;
 
+	RamenTimer timer{ Vec2{640, 75} };
 	StaminaGauge stamina{ Vec2{20, 160} };
 
-
-	void drawTime() const;
 
 	void retry();
 	void changeNextStage();

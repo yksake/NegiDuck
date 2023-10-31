@@ -51,6 +51,7 @@ void Game::update()
 
 				player.resume();
 				bowl.resume();
+				timer.resume();
 
 				return;
 			}
@@ -66,6 +67,7 @@ void Game::update()
 
 		player.pause();
 		bowl.pause();
+		timer.pause();
 
 		return;
 	}
@@ -100,7 +102,7 @@ void Game::draw() const
 
 	player.draw();
 
-	drawTime();
+	timer.draw();
 	stamina.draw(player.staminaPercentage());
 
 	if (menu.isActive())
@@ -108,33 +110,6 @@ void Game::draw() const
 		Scene::Rect().draw(Color{ 34, 32, 52, 100 });
 
 		menu.draw();
-	}
-}
-
-void Game::drawTime() const
-{
-	const uint8 fontSize = 5;
-	const Color color{ 50 };
-
-	// minute
-	{
-		const Vec2 pos = { 630, 45 };
-
-		PixelCube::Draw(U"00", fontSize, Arg::topRight = pos, color);
-	}
-
-	// colon
-	{
-		const Vec2 pos = { 635, 45 };
-
-		PixelCube::Draw(U":", fontSize, pos, color);
-	}
-
-	// seconds
-	{
-		const Vec2 pos = { 650, 45 };
-
-		PixelCube::Draw(U"00", fontSize, pos, color);
 	}
 }
 
@@ -146,6 +121,8 @@ void Game::retry()
 	player = Duck{ playerPos };
 
 	bowl = RamenBowl{ stageCnt, Scene::Rect().stretched(-185, -80, 0, -80) };
+
+	timer.start();
 }
 
 void Game::changeNextStage()

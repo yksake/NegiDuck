@@ -3,7 +3,6 @@
 StaminaGauge::StaminaGauge()
 {
 	m_icon = Texture{ U"img/Bubble.png" };
-	m_pos = Vec2::Zero();
 }
 
 StaminaGauge::StaminaGauge(const Vec2& pos)

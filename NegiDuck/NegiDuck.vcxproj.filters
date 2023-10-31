@@ -234,6 +234,9 @@
     <ClCompile Include="StaminaGauge.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="RamenTimer.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -945,6 +948,9 @@
       <Filter>RamenNoodles</Filter>
     </ClInclude>
     <ClInclude Include="StaminaGauge.hpp">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="RamenTimer.hpp">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
