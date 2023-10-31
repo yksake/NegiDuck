@@ -62,4 +62,5 @@ private:
 
 	void updateMove(Vec2 leftStick);
 	void dash();
+	void applyTerminalSpeed();
 };

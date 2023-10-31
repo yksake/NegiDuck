@@ -73,7 +73,6 @@ void Duck::update(const dss::InputState& input)
 void Duck::updateMove(Vec2 leftStick)
 {
 	const double moveSpeed = 7.0;
-	const double terminalSpeed = 3.0;
 
 	if (m_recoveryTimer.isRunning())
 	{
@@ -91,10 +90,7 @@ void Duck::updateMove(Vec2 leftStick)
 		m_speed.y *= m_Registance * Scene::DeltaTime() / (1.0 / 60.0);
 	}
 
-	if (terminalSpeed < m_speed.length())
-	{
-		m_speed.setLength(terminalSpeed);
-	}
+	applyTerminalSpeed();
 
 	if (leftStick.x < 0)
 	{
@@ -146,6 +142,18 @@ void Duck::dash()
 	m_stamina -= staminaDecrease;
 
 	m_dashTimer.restart();
+}
+
+void Duck::applyTerminalSpeed()
+{
+	double terminalSpeed = 3.0;
+
+	terminalSpeed *= 1.0 - 0.1 * (double)Clamp(m_greenOnionCnt, (uint8)0, (uint8)5);
+
+	if (terminalSpeed < m_speed.length())
+	{
+		m_speed.setLength(terminalSpeed);
+	}
 }
 
 
