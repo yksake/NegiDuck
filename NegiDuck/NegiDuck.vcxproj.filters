@@ -237,6 +237,9 @@
     <ClCompile Include="RamenTimer.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="PlayTime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -952,6 +955,9 @@
     </ClInclude>
     <ClInclude Include="RamenTimer.hpp">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayTime.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

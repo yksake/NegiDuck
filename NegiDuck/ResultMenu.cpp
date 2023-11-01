@@ -37,7 +37,7 @@ void ResultMenu::draw() const
 
 	const String text = U"Result";
 	const uint8 fontSize = 8;
-	const Vec2 pos = m_area.center();
+	const Vec2 pos = Scene::CenterF();
 	const Color color = Palette::White;
 
 	PixelCube::Draw(text, fontSize, Arg::center = pos, color);

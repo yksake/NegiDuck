@@ -12,7 +12,7 @@ void Main()
 
 	Scene::SetResizeMode(ResizeMode::Actual);
 
-	FontAsset::Register(U"PixelCube", 65, U"font/x7y13PixelCube.ttf", FontStyle::Bitmap);
+	FontAsset::Register(U"PixelCube", 65, U"font/x7y13PixelCubeP.ttf", FontStyle::Bitmap);
 
 	MyApp manager;
 	manager

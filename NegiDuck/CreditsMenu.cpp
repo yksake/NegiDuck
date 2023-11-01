@@ -9,7 +9,7 @@ const Array<String> CreditsMenu::m_Menus = {
 	U"LargeC"
 };
 
-const String CreditsMenu::m_Version = U"r3";
+const String CreditsMenu::m_Version = U"r4";
 const Vec2 CreditsMenu::m_BasePos = { 1110, 160 };
 const Vec2 CreditsMenu::m_VersionRelPos = { 45, 25 };
 

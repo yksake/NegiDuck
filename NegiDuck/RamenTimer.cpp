@@ -22,9 +22,9 @@ void RamenTimer::draw() const
 		String text = U"{:0>2}"_fmt(m_stopwatch.min());
 		const Vec2 pos = m_pos.movedBy(-2 * fontSize, 0);
 
-		if (100 <= m_stopwatch.min())
+		if (59 <= m_stopwatch.min())
 		{
-			text = U"99";
+			text = U"59";
 		}
 
 		PixelCube::Draw(text, fontSize, Arg::rightCenter = pos, color);
@@ -63,4 +63,16 @@ void RamenTimer::pause()
 void RamenTimer::resume()
 {
 	m_stopwatch.resume();
+}
+
+
+PlayTime RamenTimer::get() const
+{
+	PlayTime time;
+
+	time.minutes = Minutes{ m_stopwatch.min() };
+	time.seconds = Seconds{ m_stopwatch.s() % 60 };
+	time.ms = Milliseconds{ m_stopwatch.ms() % 1000 };
+
+	return time;
 }

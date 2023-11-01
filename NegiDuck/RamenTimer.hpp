@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include <Siv3D.hpp>
+#include "PlayTime.hpp"
 
 class RamenTimer
 {
@@ -12,6 +12,8 @@ public:
 	void start();
 	void pause();
 	void resume();
+
+	PlayTime get() const;
 
 
 private:

@@ -26,6 +26,7 @@ void Game::update()
 			if (const auto scene = menu.nextScene())
 			{
 				changeScene(scene.value(), 0);
+				return;
 			}
 			else if (menu.isOpening())
 			{
@@ -72,6 +73,11 @@ void Game::update()
 		return;
 	}
 
+	if (KeyR.down())
+	{
+		changeScene(State::Result, 0);
+	}
+
 	bowl.update();
 
 	player.update(input);
@@ -90,6 +96,13 @@ void Game::update()
 	if (bowl.isCompleted())
 	{
 		timer.pause();
+		getData().time = timer.get();
+
+		if (getData().bestTime.isZero() || getData().time < getData().bestTime)
+		{
+			getData().bestTime = getData().time;
+		}
+
 		menu = MenuManager{ InitType::Complete, Scene::Rect() };
 		menu.openMenu();
 

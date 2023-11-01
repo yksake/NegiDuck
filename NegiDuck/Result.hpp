@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include "Common.hpp"
-#include "MenuManager.hpp"
 
 class Result : public MyApp::Scene
 {
@@ -12,5 +11,5 @@ public:
 
 
 private:
-	MenuManager menu{ InitType::Result, Scene::Rect() };
+	
 };

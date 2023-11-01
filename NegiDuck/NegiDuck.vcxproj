@@ -135,6 +135,7 @@
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="Noodle.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
+    <ClCompile Include="PlayTime.cpp" />
     <ClCompile Include="RamenBowl.cpp" />
     <ClCompile Include="RamenTimer.cpp" />
     <ClCompile Include="Result.cpp" />
@@ -361,6 +362,7 @@
     <ClInclude Include="MenuManager.hpp" />
     <ClInclude Include="Noodle.hpp" />
     <ClInclude Include="PauseMenu.hpp" />
+    <ClInclude Include="PlayTime.hpp" />
     <ClInclude Include="RamenBowl.hpp" />
     <ClInclude Include="RamenTimer.hpp" />
     <ClInclude Include="Result.hpp" />
