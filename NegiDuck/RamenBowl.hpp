@@ -21,11 +21,13 @@ public:
 
 
 private:
+	Texture m_soup;
+	// 雷紋
 	Texture m_raimon;
 
 	RectF m_gameArea;
 
-	ChineseSpoon m_spoon{ Vec2{ 1030, 165 } };
+	ChineseSpoon m_spoon{ Vec2{ 1030, 165 }, 1 };
 	Array<Noodle> m_noodles;
 	Array<GreenOnion> m_greenOnions;
 	Array<std::unique_ptr<Ingredient>> m_objects;

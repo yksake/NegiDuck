@@ -15,6 +15,7 @@ Title::~Title()
 
 void Title::update()
 {
+	getData().hideCursor();
 	getData().input.beginFrame();
 
 	if (menu.update(getData().input.inputState()))

@@ -2,12 +2,12 @@
 
 StaminaGauge::StaminaGauge()
 {
-	m_icon = Texture{ U"img/Bubble.png" };
+	m_icon = Texture{ Resource(U"img/Bubble.png") };
 }
 
 StaminaGauge::StaminaGauge(const Vec2& pos)
 {
-	m_icon = Texture{ U"img/Bubble.png" };
+	m_icon = Texture{ Resource(U"img/Bubble.png") };
 	m_pos = pos;
 }
 

@@ -3,7 +3,8 @@
 
 RamenBowl::RamenBowl(const uint8 stageNum, const RectF& area)
 {
-	m_raimon = Texture{ U"img/Raimon.png" };
+	m_soup = Texture{ Resource(U"img/Soup.png") };
+	m_raimon = Texture{ Resource(U"img/Raimon.png") };
 
 	m_gameArea = area;
 
@@ -18,13 +19,14 @@ void RamenBowl::cook(const uint8 stageNum)
 
 	if (stageNum == 0)
 	{
-		m_spoon = ChineseSpoon{ m_gameArea.tr().movedBy(-85, 0) };
+		m_spoon = ChineseSpoon{ m_gameArea.tr().movedBy(-85, 0), 4 };
 
 		m_noodles << Noodle{ m_gameArea.center() + Vec2{250, 0}, 6, true };
 		m_noodles << Noodle{ Vec2{450, 460}, 9, false };
+		m_noodles << Noodle{ Vec2{180, 690}, 4, false };
 
 		m_greenOnions << GreenOnion{ m_gameArea.center() - Vec2{200, 100}};
-		m_greenOnions << GreenOnion{ m_gameArea.center() + Vec2{-420, 180} };
+		m_greenOnions << GreenOnion{ m_gameArea.center() + Vec2{-450, 180} };
 		m_greenOnions << GreenOnion{ Vec2{760, 430} };
 		m_greenOnions << GreenOnion{ Vec2{1005, 540} };
 
@@ -53,13 +55,9 @@ void RamenBowl::update()
 
 void RamenBowl::draw() const
 {
-	// Soup
-	{
-		const Color color{ 224, 184, 159 };
-		m_gameArea.draw(color);
-	}
+	Scene::Rect()(m_soup).draw();
 
-	// Wall
+	// Side Wall
 	{
 		const Color color{ 50 };
 
@@ -144,7 +142,7 @@ void RamenBowl::checkFloating(Duck& duck, const dss::InputState& input)
 	// Chinese Spoon
 	if (m_spoon.isHit(duck))
 	{
-		duck.putGreenOnion();
+		m_spoon.takeInGreenOnion(duck.putGreenOnion());
 
 		m_greenOnions.remove_if([](const GreenOnion& go) { return not go.isAlive(); });
 	}

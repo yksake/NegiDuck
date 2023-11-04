@@ -10,6 +10,7 @@ public:
 
 
 	PlayTime();
+	PlayTime(const uint32 min, const uint32 sec, const uint32 ms);
 
 	bool isZero() const;
 
@@ -61,5 +62,37 @@ public:
 		}
 
 		return false;
+	}
+
+	PlayTime operator +(const PlayTime& pt) const
+	{
+		PlayTime time;
+
+		time.ms = this->ms + pt.ms;
+		time.seconds = Seconds{ time.ms.count() / 1000 };
+		time.ms %= 1000;
+
+		time.seconds += this->seconds + pt.seconds;
+		time.minutes = Minutes{ time.seconds.count() / 60 };
+		time.seconds %= 60;
+
+		time.minutes += this->minutes + pt.minutes;
+
+		return time;
+	}
+
+	PlayTime& operator +=(const PlayTime& pt)
+	{
+		this->ms += pt.ms;
+		this->seconds += Seconds{ this->ms.count() / 1000 };
+		this->ms %= 1000;
+
+		this->seconds += pt.seconds;
+		this->minutes += Minutes{ this->seconds.count() / 60 };
+		this->seconds %= 60;
+
+		this->minutes += pt.minutes;
+
+		return *this;
 	}
 };

@@ -2,7 +2,7 @@
 
 GreenOnion::GreenOnion(const Vec2& pos) : Ingredient(pos, SizeF{ 45, 50 }, SizeF{ 55, 60 })
 {
-	m_texture = Texture{ U"img/GreenOnion.png" };
+	m_texture = Texture{ Resource(U"img/GreenOnion.png") };
 
 	m_textureType = Random(0, 3);
 }

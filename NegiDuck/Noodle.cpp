@@ -6,7 +6,7 @@ const double Noodle::m_RecoveryTime = 0.15;
 
 Noodle::Noodle(const Vec2& pos, const uint8 length, const bool isVertical) : Ingredient(pos, SizeF::Zero())
 {
-	m_texture = Texture{ U"img/Noodle.png" };
+	m_texture = Texture{ Resource(U"img/Noodle.png") };
 
 	const double thickness = 20;
 	const double baseLength = 40;

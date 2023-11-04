@@ -16,6 +16,7 @@ Game::~Game()
 
 void Game::update()
 {
+	getData().hideCursor();
 	getData().input.beginFrame();
 	const dss::InputState input = getData().input.inputState();
 
@@ -95,6 +96,9 @@ void Game::update()
 
 	if (bowl.isCompleted())
 	{
+		player.pause();
+		bowl.pause();
+
 		timer.pause();
 		getData().time = timer.get();
 

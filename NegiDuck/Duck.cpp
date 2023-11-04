@@ -6,7 +6,7 @@ const double Duck::m_MaxStamina = 100;
 
 Duck::Duck(const Vec2& pos) : GameObject(pos, SizeF{ 40, 50 }, SizeF{ 80, 80 })
 {
-	m_texture = Texture{ U"img/Duck.png" };
+	m_texture = Texture{ Resource(U"img/Duck.png") };
 }
 
 
@@ -45,29 +45,9 @@ void Duck::update(const dss::InputState& input)
 
 	m_velocity = m_speed + m_environmentalSpeed;
 
-	/*
-	if (m_velocity.x < 0)
-	{
-		if (0 <= previousVelocity.x)
-		{
-			m_animationTimer.restart();
-		}
-	}
-	else if (0 < m_velocity.x)
-	{
-		if (previousVelocity.x <= 0)
-		{
-			m_animationTimer.restart();
-		}
-	}
-	else
-	{
-		if (m_animationTimer.isStarted())
-		{
-			m_animationTimer.reset();
-		}
-	}
-	*/
+	updateAnimationTimer(input.leftStick);
+
+	m_previousLeftStick = input.leftStick;
 }
 
 void Duck::updateMove(Vec2 leftStick)
@@ -147,12 +127,44 @@ void Duck::dash()
 void Duck::applyTerminalSpeed()
 {
 	double terminalSpeed = 3.0;
+	const double decrease = 0.15;
+	const uint8 maxCnt = 3;
 
-	terminalSpeed *= 1.0 - 0.1 * (double)Clamp(m_greenOnionCnt, (uint8)0, (uint8)5);
+	terminalSpeed *= 1.0 - decrease * (double)Clamp(m_greenOnionCnt, (uint8)0, maxCnt);
 
 	if (terminalSpeed < m_speed.length())
 	{
 		m_speed.setLength(terminalSpeed);
+	}
+}
+
+void Duck::updateAnimationTimer(const Vec2& leftStick)
+{
+	if (m_isFloating)
+	{
+		if (Abs(leftStick.x) < leftStick.y)
+		{
+			m_animationTimer.restart();
+		}
+		else if (leftStick.x == 0)
+		{
+			m_animationTimer.reset();
+		}
+		else if (m_previousLeftStick.x == 0)
+		{
+			m_animationTimer.restart();
+		}
+	}
+	else
+	{
+		if (leftStick.x == 0 && leftStick.y == 0)
+		{
+			m_animationTimer.reset();
+		}
+		else if (m_previousLeftStick.x == 0 && m_previousLeftStick.y == 0)
+		{
+			m_animationTimer.restart();
+		}
 	}
 }
 
@@ -164,7 +176,17 @@ void Duck::draw() const
 
 	if (not m_isFloating)
 	{
-		clip.moveBy(clipSize.x, 0);
+		clip.moveBy(clipSize.x * 2, 0);
+	}
+
+	if (m_animationTimer.isRunning())
+	{
+		const int frameTime = 300;
+
+		if (m_animationTimer.ms() / frameTime % 2 == 0)
+		{
+			clip.moveBy(clipSize.x, 0);
+		}
 	}
 
 	viewRegion()(m_texture(clip).mirrored(m_isRight)).draw();
@@ -297,6 +319,13 @@ uint8 Duck::putGreenOnion()
 void Duck::startRecoveryTime(const double& ms)
 {
 	m_recoveryTimer.restart(Duration{ ms });
+}
+
+
+void Duck::kill()
+{
+	m_isAlive = false;
+	m_animationTimer.pause();
 }
 
 

@@ -14,39 +14,34 @@ RamenTimer::RamenTimer(const Vec2& pos)
 
 void RamenTimer::draw() const
 {
+	String time;
 	const uint8 fontSize = 5;
 	const Color color{ 50 };
 
 	// minute
+	if (60 <= m_stopwatch.min())
 	{
-		String text = U"{:0>2}"_fmt(m_stopwatch.min());
-		const Vec2 pos = m_pos.movedBy(-2 * fontSize, 0);
-
-		if (59 <= m_stopwatch.min())
-		{
-			text = U"59";
-		}
-
-		PixelCube::Draw(text, fontSize, Arg::rightCenter = pos, color);
+		time = U"59";
+	}
+	else
+	{
+		time += U"{:0>2}"_fmt(m_stopwatch.min());
 	}
 
 	// colon
-	{
-		PixelCube::Draw(U":", fontSize, Arg::center = m_pos, color);
-	}
+	time += U":";
 
 	// seconds
+	if (60 <= m_stopwatch.min())
 	{
-		String text = U"{:0>2}"_fmt(m_stopwatch.s() % 60);
-		const Vec2 pos = m_pos.movedBy(2 * fontSize, 0);
-
-		if (100 <= m_stopwatch.min())
-		{
-			text = U"59";
-		}
-
-		PixelCube::Draw(text, fontSize, Arg::leftCenter = pos, color);
+		time = U"59";
 	}
+	else
+	{
+		time += U"{:0>2}"_fmt(m_stopwatch.s() % 60);
+	}
+
+	PixelCube::Draw(time, fontSize, Arg::center = m_pos, color);
 }
 
 

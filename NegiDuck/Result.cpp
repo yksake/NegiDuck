@@ -14,6 +14,7 @@ Result::~Result()
 
 void Result::update()
 {
+	getData().hideCursor();
 	getData().input.beginFrame();
 	const auto& input = getData().input.inputState();
 
@@ -47,7 +48,7 @@ void Result::draw() const
 
 	const uint8 fontSize = 5;
 	const double relX = 250;
-	double y = Scene::CenterF().y - 50;
+	double y = Scene::CenterF().y - 30;
 
 	{
 		PixelCube::Draw(U"1st", fontSize, Vec2{Scene::CenterF().x - relX, y}, color);
@@ -59,7 +60,7 @@ void Result::draw() const
 		PixelCube::Draw(text, fontSize, Arg::topRight = Vec2{Scene::CenterF().x + relX, y}, color);
 	}
 
-	y += 160;
+	y += 140;
 
 	{
 		const String line = U"----------------";
@@ -71,9 +72,9 @@ void Result::draw() const
 	{
 		PixelCube::Draw(U"Total", fontSize, Vec2{ Scene::CenterF().x - relX, y }, color);
 
-		const auto& time = getData().time;
+		const auto& total = getData().time;
 		String s = U"{0:0>2}\'{1:0>2}\"{2:0>3}";
-		String text = Fmt(s)(time.minutes.count(), time.seconds.count(), time.ms.count());
+		String text = Fmt(s)(total.minutes.count(), total.seconds.count(), total.ms.count());
 
 		PixelCube::Draw(text, fontSize, Arg::topRight = Vec2{ Scene::CenterF().x + relX, y }, color);
 	}

@@ -37,6 +37,8 @@ public:
 
 	void startRecoveryTime(const double& ms = 1.0);
 
+	void kill();
+
 	void pause() override;
 	void resume() override;
 
@@ -46,6 +48,7 @@ private:
 	Vec2 m_environmentalSpeed = Vec2::Zero();
 	Vec2 m_velocity = Vec2::Zero();
 	static const double m_Registance;
+	Vec2 m_previousLeftStick = Vec2::Zero();
 	Vec2 m_lastLeftStick = Vec2::Zero();
 
 	bool m_isFloating = true;
@@ -63,4 +66,5 @@ private:
 	void updateMove(Vec2 leftStick);
 	void dash();
 	void applyTerminalSpeed();
+	void updateAnimationTimer(const Vec2& leftStick);
 };

@@ -2,7 +2,7 @@
 
 Bomb::Bomb(const Vec2& pos) : Ingredient(pos, SizeF{ 50, 50 }, SizeF{ 70, 70 })
 {
-	m_texture = Texture{ U"img/Bomb.png" };
+	m_texture = Texture{ Resource(U"img/Bomb.png") };
 }
 
 
