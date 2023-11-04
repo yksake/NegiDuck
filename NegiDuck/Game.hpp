@@ -26,6 +26,8 @@ private:
 	RamenTimer timer{ Vec2{640, 75} };
 	StaminaGauge stamina{ Vec2{20, 160} };
 
+	AsyncTask<void> task;
+
 
 	void retry();
 	void changeNextStage();

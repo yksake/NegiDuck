@@ -41,23 +41,11 @@ void ConfigMenu::draw() const
 		return;
 	}
 
+	const String text = U"COMING SOON";
+	const uint8 fontSize = 8;
 	const Color color = Palette::White;
 
-	{
-		const String text = U"This is Config";
-		const uint8 fontSize = 5;
-		const Vec2 pos = m_area.center() - Vec2{ 0, 60 };
-
-		PixelCube::Draw(text, fontSize, Arg::center = pos, color);
-	}
-
-	{
-		const String text = U"COMING SOON";
-		const uint8 fontSize = 8;
-		const Vec2 pos = m_area.center() + Vec2{ 0, 50 };
-
-		PixelCube::Draw(text, fontSize, Arg::center = pos, color);
-	}
+	PixelCube::Draw(text, fontSize, Arg::center = m_area.center(), color);
 }
 
 

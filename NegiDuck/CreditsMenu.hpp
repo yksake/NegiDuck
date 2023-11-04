@@ -16,6 +16,8 @@ public:
 private:
 	static const Array<String> m_Menus;
 	static const String m_Version;
-	static const Vec2 m_BasePos;
-	static const Vec2 m_VersionRelPos;
+
+
+	void drawCredits() const;
+	void drawVersion() const;
 };

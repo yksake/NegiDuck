@@ -3,9 +3,14 @@
 
 Game::Game(const InitData& init) : IScene(init)
 {
-	Scene::SetBackground(Palette::White);
+	auto load = [this]()
+	{
+		Scene::SetBackground(Palette::White);
 
-	retry();
+		retry();
+	};
+
+	task = Async(load);
 }
 
 Game::~Game()
@@ -19,6 +24,15 @@ void Game::update()
 	getData().hideCursor();
 	getData().input.beginFrame();
 	const dss::InputState input = getData().input.inputState();
+
+	if (task.isReady())
+	{
+		task.get();
+	}
+	else if (task.isValid())
+	{
+		return;
+	}
 
 	if (menu.isActive())
 	{
@@ -74,11 +88,6 @@ void Game::update()
 		return;
 	}
 
-	if (KeyR.down())
-	{
-		changeScene(State::Result, 0);
-	}
-
 	bowl.update();
 
 	player.update(input);
@@ -117,6 +126,12 @@ void Game::update()
 
 void Game::draw() const
 {
+	if (task.isValid())
+	{
+		Scene::Rect().draw(Color{ 34, 32, 52 });
+		return;
+	}
+
 	bowl.draw();
 
 	player.draw();

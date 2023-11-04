@@ -13,4 +13,6 @@ public:
 
 private:
 	MenuManager menu{ InitType::Main, Scene::Rect() };
+
+	AsyncTask<void> task;
 };

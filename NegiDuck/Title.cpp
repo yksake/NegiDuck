@@ -2,9 +2,14 @@
 
 Title::Title(const InitData& init) : IScene(init)
 {
-	Scene::SetBackground(Color{ 34, 32, 52 });
+	auto load = [this]()
+	{
+		Scene::SetBackground(Color{ 34, 32, 52 });
 
-	menu.openMenu();
+		menu.openMenu();
+	};
+
+	task = Async(load);
 }
 
 Title::~Title()
@@ -17,6 +22,15 @@ void Title::update()
 {
 	getData().hideCursor();
 	getData().input.beginFrame();
+
+	if (task.isReady())
+	{
+		task.get();
+	}
+	else if (task.isValid())
+	{
+		return;
+	}
 
 	if (menu.update(getData().input.inputState()))
 	{
@@ -38,5 +52,11 @@ void Title::update()
 
 void Title::draw() const
 {
+	if (task.isValid())
+	{
+		Scene::Rect().draw(Color{ 34, 32, 52 });
+		return;
+	}
+
 	menu.draw();
 }

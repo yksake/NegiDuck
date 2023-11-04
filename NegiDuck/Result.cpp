@@ -3,7 +3,12 @@
 
 Result::Result(const InitData& init) : IScene(init)
 {
-	Scene::SetBackground(Color{ 34, 32, 52 });
+	auto load = [this]()
+	{
+		Scene::SetBackground(Color{ 34, 32, 52 });
+	};
+
+	task = Async(load);
 }
 
 Result::~Result()
@@ -18,6 +23,15 @@ void Result::update()
 	getData().input.beginFrame();
 	const auto& input = getData().input.inputState();
 
+	if (task.isReady())
+	{
+		task.get();
+	}
+	else if (task.isValid())
+	{
+		return;
+	}
+
 	if (input.applyDown)
 	{
 		changeScene(State::Title, 0);
@@ -26,6 +40,12 @@ void Result::update()
 
 void Result::draw() const
 {
+	if (task.isValid())
+	{
+		Scene::Rect().draw(Color{ 34, 32, 52 });
+		return;
+	}
+
 	// Paper
 	{
 		RectF paper = Scene::Rect().stretched(-320, 0);

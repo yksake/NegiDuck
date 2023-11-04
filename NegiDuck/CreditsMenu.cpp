@@ -5,13 +5,14 @@ const Array<String> CreditsMenu::m_Menus = {
 	U"@Developed by",
 	U"Dessert Seed Studio",
 	U"",
-	U"@Programming and Graphic",
-	U"LargeC"
+	U"@Program, Plan and Graphic",
+	U"LargeC",
+	U"",
+	U"@Plan and Sound",
+	U"Lybel"
 };
 
-const String CreditsMenu::m_Version = U"r4";
-const Vec2 CreditsMenu::m_BasePos = { 1110, 160 };
-const Vec2 CreditsMenu::m_VersionRelPos = { 45, 25 };
+const String CreditsMenu::m_Version = U"r5";
 
 
 CreditsMenu::CreditsMenu(const RectF& area) : AbstractMenu(area)
@@ -54,7 +55,14 @@ void CreditsMenu::draw() const
 		return;
 	}
 
-	Vec2 pos = m_BasePos;
+	drawCredits();
+	drawVersion();
+}
+
+void CreditsMenu::drawCredits() const
+{
+	const Vec2 basePos = { 1110, 70 };
+	Vec2 pos = basePos;
 
 	for (const auto& menu : m_Menus)
 	{
@@ -88,15 +96,16 @@ void CreditsMenu::draw() const
 			pos.y += interval;
 		}
 	}
+}
 
-	// Version
-	{
-		const uint8 fontSize = 4;
-		const Vec2 versionPos = Scene::Size() - m_VersionRelPos;
-		const Color color{ 128 };
+void CreditsMenu::drawVersion() const
+{
+	const uint8 fontSize = 4;
+	const Vec2 relPos = { 45, 25 };
+	const Vec2 pos = Scene::Size() - relPos;
+	const Color color{ 128 };
 
-		PixelCube::Draw(m_Version, fontSize, Arg::bottomRight = versionPos, color);
-	}
+	PixelCube::Draw(m_Version, fontSize, Arg::bottomRight = pos, color);
 }
 
 
