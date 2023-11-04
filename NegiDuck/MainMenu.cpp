@@ -24,11 +24,11 @@ bool MainMenu::update(const dss::InputState input)
 
 	bool updated = false;
 
-	if (input.upDown && 0 < m_index)
+	if ((input.upDown || input.upLongPressed) && 0 < m_index)
 	{
 		m_index--;
 	}
-	if (input.downDown && m_index < m_MaxIndex)
+	if ((input.downDown || input.downLongPressed) && m_index < m_MaxIndex)
 	{
 		m_index++;
 	}

@@ -12,7 +12,7 @@ const Array<String> CreditsMenu::m_Menus = {
 	U"Lybel"
 };
 
-const String CreditsMenu::m_Version = U"r5";
+const String CreditsMenu::m_Version = U"Alpha.1";
 
 
 CreditsMenu::CreditsMenu(const RectF& area) : AbstractMenu(area)
@@ -101,11 +101,11 @@ void CreditsMenu::drawCredits() const
 void CreditsMenu::drawVersion() const
 {
 	const uint8 fontSize = 4;
-	const Vec2 relPos = { 45, 25 };
-	const Vec2 pos = Scene::Size() - relPos;
+	const Vec2 relPos = { 65, -25 };
+	const Vec2 pos = Scene::Rect().bl() + relPos;
 	const Color color{ 128 };
 
-	PixelCube::Draw(m_Version, fontSize, Arg::bottomRight = pos, color);
+	PixelCube::Draw(m_Version, fontSize, Arg::bottomLeft = pos, color);
 }
 
 

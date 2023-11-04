@@ -1,7 +1,7 @@
 ﻿#include "Noodle.hpp"
 
 const double Noodle::m_BoundSpeed = 7;
-const double Noodle::m_RecoveryTime = 0.15;
+const double Noodle::m_RecoveryTime = 0.23;
 
 
 Noodle::Noodle(const Vec2& pos, const uint8 length, const bool isVertical) : Ingredient(pos, SizeF::Zero())

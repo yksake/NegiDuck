@@ -78,6 +78,9 @@ void InputManager::beginFrame()
 
 void InputManager::updateXInput()
 {
+	m_previousXLStickD4 = m_xController.leftThumbD4();
+	m_previousXRStickD4 = m_xController.rightThumbD4();
+
 	const size_t playerIndex = 0;
 
 	if (m_xController = XInput(playerIndex))
@@ -97,19 +100,14 @@ void InputManager::updateXInput()
 		xinput.pause = { m_xController.buttonMenu };
 
 		m_inputs += xinput;
-
-		m_previousXLStickD4 = m_xController.leftThumbD4();
-		m_previousXRStickD4 = m_xController.rightThumbD4();
-	}
-	else
-	{
-		m_previousXLStickD4 = none;
-		m_previousXRStickD4 = none;
 	}
 }
 
 void InputManager::updateProCon()
 {
+	m_previousProLStickD4 = proLeftStickD4();
+	m_previousProRStickD4 = proRightStickD4();
+
 	const size_t playerIndex = 0;
 
 	if (m_proController = ProController{ playerIndex })
@@ -128,19 +126,14 @@ void InputManager::updateProCon()
 		procon.pause = { m_proController.buttonPlus };
 
 		m_inputs += procon;
-
-		m_previousProLStickD4 = proLeftStickD4();
-		m_previousProRStickD4 = proRightStickD4();
-	}
-	else
-	{
-		m_previousProLStickD4 = none;
-		m_previousProRStickD4 = none;
 	}
 }
 
 void InputManager::updateGamepad()
 {
+	m_previousGamepadLStickD4 = gamepadLeftStickD4();
+	m_previousGamepadRStickD4 = gamepadRightStickD4();
+
 	const size_t playerIndex = 0;
 
 	if (m_gamepad = Gamepad(playerIndex))
@@ -163,14 +156,6 @@ void InputManager::updateGamepad()
 		gamepad.pause = { m_gamepad.buttons[9] };
 
 		m_inputs += gamepad;
-
-		m_previousGamepadLStickD4 = gamepadLeftStickD4();
-		m_previousGamepadRStickD4 = gamepadRightStickD4();
-	}
-	else
-	{
-		m_previousGamepadLStickD4 = none;
-		m_previousGamepadRStickD4 = none;
 	}
 }
 
@@ -299,9 +284,9 @@ bool InputManager::leftStickD4Up(const uint8 direction) const
 		return false;
 	}
 
-	bool xinput = m_previousXLStickD4 == direction && m_xController.leftThumbD4() != direction;
-	bool procon = m_previousProLStickD4 == direction && proLeftStickD4() != direction;
-	bool gamepad = m_previousGamepadLStickD4 == direction && gamepadLeftStickD4() != direction;
+	bool xinput = m_xController.leftThumbD4() != direction && m_previousXLStickD4 == direction;
+	bool procon = proLeftStickD4() != direction && m_previousProLStickD4 == direction;
+	bool gamepad = gamepadLeftStickD4() != direction && m_previousGamepadLStickD4 == direction;
 
 	return xinput || procon || gamepad;
 }
